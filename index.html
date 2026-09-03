@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ornith SGLang • Live Metrics</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+<style>
+:root{--bg:#090909;--panel:#111;--panel2:#151515;--line:#292929;--text:#f5f5f5;--muted:#9a9a9a;--orange:#ff7a00;--orange2:#ff9d3d;--green:#31d17c;--red:#ff4d4d;--yellow:#f5c542;--shadow:0 10px 35px #0008}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 20% 0%,#261507 0,#090909 34%);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#0b0b0bec;border-bottom:1px solid var(--line);backdrop-filter:blur(18px)}
+.top{max-width:1600px;margin:auto;padding:18px 24px;display:flex;gap:18px;align-items:center;justify-content:space-between}.brand{display:flex;align-items:center;gap:13px}.logo{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,var(--orange),#ff4f00);display:grid;place-items:center;font-weight:900;color:#090909;box-shadow:0 0 28px #ff720044}.brand h1{font-size:18px;margin:0}.brand span{font-size:12px;color:var(--muted)}
+.controls{display:flex;gap:9px;flex-wrap:wrap;justify-content:flex-end}.input{background:#111;border:1px solid #333;color:white;border-radius:9px;padding:10px 12px;min-width:330px;outline:none}.input:focus{border-color:var(--orange)}button,select{background:#191919;color:#eee;border:1px solid #343434;border-radius:9px;padding:10px 13px;cursor:pointer}button:hover{border-color:var(--orange);color:#fff}.primary{background:var(--orange);color:#090909;border-color:var(--orange);font-weight:800}.primary:hover{background:var(--orange2);color:#090909}.status{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:7px}.dot{width:8px;height:8px;border-radius:50%;background:var(--red)}.dot.ok{background:var(--green);box-shadow:0 0 10px #31d17c}.dot.warn{background:var(--yellow)}
+main{max-width:1600px;margin:auto;padding:24px}.hero{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:20px}.hero h2{font-size:28px;margin:0 0 5px}.hero p{margin:0;color:var(--muted);font-size:13px}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:14px}.grid.two{grid-template-columns:1fr 2fr;align-items:stretch}.card{background:linear-gradient(180deg,#151515,#101010);border:1px solid var(--line);border-radius:14px;padding:17px;box-shadow:var(--shadow)}.label{font-size:11px;text-transform:uppercase;letter-spacing:.09em;color:var(--muted)}.value{font-size:28px;font-weight:800;margin-top:8px}.sub{font-size:12px;color:var(--muted);margin-top:5px}.accent{color:var(--orange2)}.wide{grid-column:span 2}.charts{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.chartbox{height:280px}.chartbox.tall{height:330px}.section{margin:26px 0 11px;font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#ddd}.bars{display:grid;gap:12px;margin-top:16px}.barrow{display:grid;grid-template-columns:170px 1fr 80px;align-items:center;gap:12px;font-size:12px}.track{height:9px;background:#252525;border-radius:99px;overflow:hidden}.fill{height:100%;background:linear-gradient(90deg,#ff4f00,var(--orange2));border-radius:99px;width:0}.tablewrap{overflow:auto}.table{width:100%;border-collapse:collapse;font-size:12px}.table th,.table td{padding:12px 14px;border-bottom:1px solid #2a2a2a;text-align:left;white-space:nowrap}.table th{color:#cfcfcf;font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.05em;background:#181818;position:sticky;top:0}.table tr:hover td{background:#141414}.pill{padding:4px 8px;border-radius:999px;background:#1e1e1e}.good{color:var(--green)}.bad{color:var(--red)}.muted{color:var(--muted)}.empty{color:var(--muted);padding:30px;text-align:center}.footer{padding:25px 0 10px;color:#666;font-size:11px;text-align:center}@media(max-width:1100px){.grid{grid-template-columns:repeat(2,1fr)}.grid.two{grid-template-columns:1fr}.charts{grid-template-columns:1fr}}@media(max-width:700px){.top{align-items:flex-start;flex-direction:column}.controls{justify-content:flex-start}.input{min-width:0;width:100%}.grid{grid-template-columns:1fr}.wide{grid-column:span 1}main{padding:15px}}
+</style>
+</head>
+<body>
+<header><div class="top">
+  <div class="brand"><div class="logo">O</div><div><h1>ORNITH • SGLANG OBSERVABILITY</h1><span>Live inference, KV cache & HiCache telemetry</span></div></div>
+  <div class="controls">
+    <input id="url" class="input" value="https://vllm.webelight.co.in/metrics" placeholder="Prometheus metrics URL">
+    <select id="interval"><option value="1000">1s</option><option value="2000" selected>2s</option><option value="5000">5s</option><option value="10000">10s</option></select>
+    <button class="primary" onclick="connect()">Connect</button>
+    <button onclick="togglePause()" id="pause">Pause</button>
+    <div class="status"><i id="dot" class="dot"></i><span id="status">Disconnected</span></div>
+  </div>
+</div></header>
+
+<main>
+<div class="hero"><div><h2>Inference Control Room</h2><p id="endpoint">Enter a Prometheus-compatible SGLang <b>/metrics</b> endpoint.</p></div><div class="muted" id="updated">—</div></div>
+
+<div class="grid">
+  <div class="card"><div class="label">Running Requests</div><div class="value accent" id="running">—</div><div class="sub">currently executing</div></div>
+  <div class="card"><div class="label">Queued Requests</div><div class="value" id="queued">—</div><div class="sub">waiting for scheduler</div></div>
+  <div class="card"><div class="label">KV Token Usage</div><div class="value" id="kvusage">—</div><div class="sub" id="kvcap">—</div></div>
+  <div class="card"><div class="label">Generation Throughput</div><div class="value" id="throughput">—</div><div class="sub">tokens / second</div></div>
+</div>
+
+<div class="grid">
+  <div class="card"><div class="label">GPU KV Cache</div><div class="value" id="gpuKV">—</div><div class="sub" id="gpuKVSub">memory usage</div><div class="bars"><div class="barrow"><span>Utilization</span><div class="track"><div class="fill" id="gpuBar"></div></div><b id="gpuPct">—</b></div></div></div>
+  <div class="card"><div class="label">HiCache Backup</div><div class="value" id="backup">—</div><div class="sub">GPU → host cumulative tokens</div><div class="bars"><div class="barrow"><span>Bytes backed up</span><div class="track"><div class="fill" id="backupBar"></div></div><b id="backupBytes">—</b></div></div></div>
+  <div class="card"><div class="label">Host Load Back</div><div class="value" id="loadback">—</div><div class="sub">host → GPU cumulative tokens</div></div>
+  <div class="card"><div class="label">Cache Hit Rate</div><div class="value" id="hit">—</div><div class="sub" id="hitSub">device + host reuse</div></div>
+</div>
+
+<div class="section">Live Scheduler & Cache</div>
+<div class="charts">
+  <div class="card"><div class="label">Requests</div><div class="chartbox"><canvas id="reqChart"></canvas></div></div>
+  <div class="card"><div class="label">KV Utilization</div><div class="chartbox"><canvas id="kvChart"></canvas></div></div>
+  <div class="card"><div class="label">Throughput</div><div class="chartbox"><canvas id="tpChart"></canvas></div></div>
+  <div class="card"><div class="label">HiCache Transfers <span class="muted">• live delta/s</span></div><div class="chartbox"><canvas id="hcChart"></canvas></div></div>
+</div>
+
+<div class="section">Cache Effectiveness</div>
+<div class="grid two">
+  <div class="card"><div class="label">HiCache Counters</div><div class="value" id="drops">—</div><div class="sub">dropped tokens</div><div class="sub" id="dropDetail">—</div></div>
+  <div class="card"><div class="label">Prefill Effective Tokens</div><div class="bars">
+    <div class="barrow"><span>Input / miss</span><div class="track"><div class="fill" id="inputBar"></div></div><b id="inputVal">—</b></div>
+    <div class="barrow"><span>Device hit</span><div class="track"><div class="fill" id="devBar"></div></div><b id="devVal">—</b></div>
+    <div class="barrow"><span>Host HiCache hit</span><div class="track"><div class="fill" id="hostBar"></div></div><b id="hostVal">—</b></div>
+    <div class="barrow"><span>Storage hit</span><div class="track"><div class="fill" id="storeBar"></div></div><b id="storeVal">—</b></div>
+  </div></div>
+</div>
+
+<div class="section">Prometheus Metrics Snapshot</div>
+<div class="card tablewrap"><table class="table"><thead><tr><th>Metric</th><th>Value</th><th>Labels</th></tr></thead><tbody id="table"><tr><td colspan="3" class="empty">Connect to a metrics endpoint.</td></tr></tbody></table></div>
+<div class="footer">Ornith SGLang Live Dashboard • Polls the configured Prometheus exposition endpoint directly</div>
+</main>
+
+<script>
+const state={running:true, timer:null, last:null, hist:{t:[],r:[],q:[],kv:[],tp:[],back:[],load:[]}};
+const wanted=['num_running_reqs','num_queue_reqs','token_usage','max_total_num_tokens','gen_throughput','cache_hit_rate','kv_cache_memory_usage_gb','hicache_backup_tokens_total','hicache_backup_bytes_total','load_back_tokens_total','hicache_dropped_tokens_total','prefill_effective_tokens_total'];
+const colors={orange:'#ff7a00',muted:'#aaa',grid:'#3a3a3a',text:'#e8e8e8',axis:'#cfcfcf'};
+function esc(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+function fmt(n,d=1){if(n==null||Number.isNaN(n))return '—';return Intl.NumberFormat('en-US',{maximumFractionDigits:d}).format(n)}
+function bytes(n){if(n==null)return '—';let u=['B','KB','MB','GB','TB'],i=0;while(Math.abs(n)>=1024&&i<4){n/=1024;i++}return `${fmt(n,2)} ${u[i]}`}
+function parseProm(text){
+ const out={}; for(const line of text.split(/\r?\n/)){if(!line||line[0]==='#')continue;
+   const m=line.match(/^([a-zA-Z_:][a-zA-Z0-9_:]*)(\{[^}]*\})?\s+([-+]?[\d.eE+-]+)$/); if(!m)continue;
+   const name=m[1], labels=m[2]||'', val=Number(m[3]); if(!out[name])out[name]=[]; out[name].push({labels,value:val});
+ } return out;
+}
+function first(p,n,filter=''){if(!p[n])return null;let x=p[n].find(x=>!filter||x.labels.includes(filter))||p[n][0];return x?.value??null}
+function sum(p,n){return p[n]?.reduce((a,x)=>a+x.value,0)??null}
+function metric(p,short){let n=Object.keys(p).find(k=>k===`sglang:${short}`||k.endsWith(`_${short}`)||k===short);return n?sum(p,n):null}
+function metricFirst(p,short,filter=''){let n=Object.keys(p).find(k=>k===`sglang:${short}`||k.endsWith(`_${short}`)||k===short);return n?first(p,n,filter):null}
+function set(id,v){document.getElementById(id).textContent=v}
+function chart(id,label,labels,datasets,units=''){return new Chart(document.getElementById(id),{type:'line',data:{labels,datasets:datasets.map((d,i)=>({label:d.label,data:d.data,borderColor:i?'#bbb':colors.orange,backgroundColor:'transparent',borderWidth:2.2,pointRadius:0,tension:.28}))},options:{responsive:true,maintainAspectRatio:false,animation:false,plugins:{legend:{labels:{color:colors.text,font:{size:12,weight:'600'},boxWidth:14,padding:10}},tooltip:{titleColor:'#fff',bodyColor:'#fff',backgroundColor:'#1a1a1a',borderColor:'#444',borderWidth:1,callbacks:{label:c=>` ${c.dataset.label}: ${fmt(c.parsed.y,1)}${units?' '+units:''}`}}},scales:{x:{ticks:{color:colors.axis,font:{size:11},maxTicksLimit:8},grid:{color:colors.grid}},y:{beginAtZero:true,ticks:{color:colors.axis,font:{size:11},callback:v=>fmt(v)},grid:{color:colors.grid},title:{display:!!units,text:units,color:colors.muted,font:{size:10,weight:'600'}}}}}})}
+let charts={};
+function initCharts(){for(const k of Object.keys(charts)){if(charts[k]){charts[k].destroy();delete charts[k]}}charts.req=chart('reqChart','',state.hist.t,[{label:'Running',data:state.hist.r},{label:'Queued',data:state.hist.q}],'reqs');charts.kv=chart('kvChart','',state.hist.t,[{label:'KV %',data:state.hist.kv}],'%');charts.tp=chart('tpChart','',state.hist.t,[{label:'Tokens/s',data:state.hist.tp}],'tok/s');charts.hc=chart('hcChart','',state.hist.t,[{label:'Backup tokens/s',data:state.hist.back},{label:'Load-back tokens/s',data:state.hist.load}],'tok/s')}
+function refreshCharts(){if(!charts.req)return;for(const c of Object.values(charts)){c.data.labels=state.hist.t;c.data.datasets[0].data=c===charts.req?state.hist.r:c===charts.kv?state.hist.kv:c===charts.tp?state.hist.tp:state.hist.back;if(c===charts.req)c.data.datasets[1].data=state.hist.q;if(c===charts.hc)c.data.datasets[1].data=state.hist.load;c.update()}}
+function pctBar(id,v){document.getElementById(id).style.width=Math.max(0,Math.min(100,v||0))+'%'}
+function update(p){
+ const r=metricFirst(p,'num_running_reqs'),q=metricFirst(p,'num_queue_reqs'),u=metricFirst(p,'token_usage'),cap=metricFirst(p,'max_total_num_tokens'),tp=metricFirst(p,'gen_throughput');
+ const kv=metricFirst(p,'kv_cache_memory_usage_gb'),hit=metricFirst(p,'cache_hit_rate');
+ const bk=metricFirst(p,'hicache_backup_tokens_total','KV'),lb=metricFirst(p,'load_back_tokens_total','KV'),bb=metricFirst(p,'hicache_backup_bytes_total','KV'),dr=metricFirst(p,'hicache_dropped_tokens_total','KV');
+ set('running',r==null?'—':fmt(r,0));set('queued',q==null?'—':fmt(q,0));set('kvusage',u==null?'—':(u*100).toFixed(1)+'%');set('kvcap',cap==null?'—':fmt(cap,0)+' max tokens');set('throughput',tp==null?'—':fmt(tp,1));
+ set('gpuKV',kv==null?'—':fmt(kv,2)+' GB');set('gpuKVSub','SGLang reported KV memory');set('gpuPct',u==null?'—':(u*100).toFixed(1)+'%');pctBar('gpuBar',(u||0)*100);
+ set('backup',bk==null?'—':fmt(bk,0));set('backupBytes',bb==null?'—':bytes(bb));set('loadback',lb==null?'—':fmt(lb,0));set('hit',hit==null?'—':(hit*100).toFixed(1)+'%');
+ set('drops',dr==null?'—':fmt(dr,0));set('dropDetail',dr==null?'No KV drop counter found':'KV HiCache drops');
+ const pe=Object.keys(p).find(k=>k.includes('prefill_effective_tokens_total'));
+ if(pe){
+   const vals=p[pe];
+   const get=t=>vals.filter(v=>{
+     const l=v.labels||'';
+     return l.includes(`mode="${t}"`)||l.includes(`type="${t}"`)||l.includes(`token_type="${t}"`);
+   }).reduce((a,x)=>a+x.value,0);
+   const a=get('input')||0,b=get('device_hit')||0,c=get('host_hit')||0,d=get('storage_hit')||0,total=a+b+c+d;
+   [['input',a],['dev',b],['host',c],['store',d]].forEach(([x,v])=>{
+     set(x+'Val',fmt(v,0));
+     pctBar(x+'Bar',total?100*v/total:0)
+   });
+ }
+ const now=new Date(), label=now.toLocaleTimeString();
+ state.hist.t.push(label);state.hist.r.push(r??0);state.hist.q.push(q??0);state.hist.kv.push(u!=null?u*100:0);state.hist.tp.push(tp??0);
+ // HiCache counters are cumulative. Convert them to live transfer rates.
+ const prev=state.prevCounters;
+ const dt=prev ? Math.max(0.25,(now-prev.t)/1000) : 0;
+ const backRate=(prev && bk!=null && bk>=prev.bk) ? (bk-prev.bk)/dt : 0;
+ const loadRate=(prev && lb!=null && lb>=prev.lb) ? (lb-prev.lb)/dt : 0;
+ state.hist.back.push(backRate);state.hist.load.push(loadRate);
+ state.prevCounters={t:now,bk:bk??0,lb:lb??0};
+ if(state.hist.t.length>60)Object.values(state.hist).forEach(a=>a.shift()); refreshCharts();
+ const rows=[];for(const n of Object.keys(p).filter(n=>wanted.some(w=>n.includes(w))).sort()){for(const x of p[n].slice(0,3))rows.push(`<tr><td>${esc(n)}</td><td>${esc(fmt(x.value,4))}</td><td class="muted">${esc(x.labels||'—')}</td></tr>`)}
+ document.getElementById('table').innerHTML=rows.length?rows.join(''):'<tr><td colspan="3" class="empty">No matching SGLang metrics found.</td></tr>';
+}
+let pollBusy=false;
+let pollSeq=0;
+
+function scheduleNext(seq){
+  if(!state.running || seq!==pollSeq) return;
+  clearTimeout(state.timer);
+  state.timer=setTimeout(poll, Number(document.getElementById('interval').value));
+}
+
+async function poll(){
+  if(!state.running || pollBusy) return;
+  const url=document.getElementById('url').value.trim();
+  if(!url) return;
+
+  pollBusy=true;
+  const seq=pollSeq;
+  const started=performance.now();
+  const timeout=new AbortController();
+  const kill=setTimeout(()=>timeout.abort(), 8000);
+
+  try{
+    // Cache-bust every request so an intermediary/proxy cannot keep returning
+    // the first Prometheus snapshot.
+    const join=url.includes('?')?'&':'?';
+    const liveUrl=url+join+'_ts='+Date.now();
+
+    const res=await fetch(liveUrl,{
+      method:'GET',
+      cache:'no-store',
+      mode:'cors',
+      credentials:'omit',
+      headers:{'Accept':'text/plain,*/*'},
+      signal:timeout.signal
+    });
+    if(!res.ok) throw new Error('HTTP '+res.status);
+
+    const text=await res.text();
+    const p=parseProm(text);
+    if(!Object.keys(p).length) throw new Error('Empty/invalid Prometheus response');
+
+    state.last=p;
+    update(p);
+
+    const latency=Math.round(performance.now()-started);
+    document.getElementById('status').textContent=`Live • ${latency}ms`;
+    document.getElementById('dot').className='dot ok';
+    document.getElementById('endpoint').textContent=url;
+    document.getElementById('updated').textContent='Updated '+new Date().toLocaleTimeString();
+  }catch(e){
+    const msg=e.name==='AbortError'
+      ? 'Timeout (>8s)'
+      : (e instanceof TypeError ? 'Fetch/CORS error' : e.message);
+    document.getElementById('status').textContent='Error: '+msg;
+    document.getElementById('dot').className='dot';
+  }finally{
+    clearTimeout(kill);
+    pollBusy=false;
+    scheduleNext(seq);
+  }
+}
+
+function connect(){
+  state.running=true;
+  pollSeq++;
+  clearTimeout(state.timer);
+  state.hist={t:[],r:[],q:[],kv:[],tp:[],back:[],load:[]};
+  state.prevCounters=null;
+  document.getElementById('pause').textContent='Pause';
+  document.getElementById('dot').className='dot warn';
+  document.getElementById('status').textContent='Connecting…';
+  initCharts();
+  poll();
+}
+
+function togglePause(){
+  state.running=!state.running;
+  pollSeq++;
+  clearTimeout(state.timer);
+  document.getElementById('pause').textContent=state.running?'Pause':'Resume';
+  document.getElementById('dot').className=state.running?'dot ok':'dot warn';
+  document.getElementById('status').textContent=state.running?'Connecting…':'Paused';
+  if(state.running) poll();
+}
+
+document.getElementById('interval').addEventListener('change',()=>{
+  if(state.running){
+    pollSeq++;
+    clearTimeout(state.timer);
+    poll();
+  }
+});
+initCharts();
+</script>
+</body>
+</html>
