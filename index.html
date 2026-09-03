@@ -6,12 +6,40 @@
 <title>Ornith SGLang • Live Metrics</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
 <style>
-:root{--bg:#090909;--panel:#111;--panel2:#151515;--line:#292929;--text:#f5f5f5;--muted:#9a9a9a;--orange:#ff7a00;--orange2:#ff9d3d;--green:#31d17c;--red:#ff4d4d;--yellow:#f5c542;--shadow:0 10px 35px #0008}
+:root{--bg:#090909;--panel:#111;--panel2:#151515;--line:#292929;--text:#f5f5f5;--muted:#9a9a9a;--orange:#ff7a00;--orange2:#ff9d3d;--green:#31d17c;--red:#ff4d4d;--yellow:#f5c542;--blue:#5aa6ff;--purple:#b48cff;--shadow:0 10px 35px #0008}
 *{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 20% 0%,#261507 0,#090909 34%);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
 header{position:sticky;top:0;z-index:5;background:#0b0b0bec;border-bottom:1px solid var(--line);backdrop-filter:blur(18px)}
-.top{max-width:1600px;margin:auto;padding:18px 24px;display:flex;gap:18px;align-items:center;justify-content:space-between}.brand{display:flex;align-items:center;gap:13px}.logo{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,var(--orange),#ff4f00);display:grid;place-items:center;font-weight:900;color:#090909;box-shadow:0 0 28px #ff720044}.brand h1{font-size:18px;margin:0}.brand span{font-size:12px;color:var(--muted)}
-.controls{display:flex;gap:9px;flex-wrap:wrap;justify-content:flex-end}.input{background:#111;border:1px solid #333;color:white;border-radius:9px;padding:10px 12px;min-width:330px;outline:none}.input:focus{border-color:var(--orange)}button,select{background:#191919;color:#eee;border:1px solid #343434;border-radius:9px;padding:10px 13px;cursor:pointer}button:hover{border-color:var(--orange);color:#fff}.primary{background:var(--orange);color:#090909;border-color:var(--orange);font-weight:800}.primary:hover{background:var(--orange2);color:#090909}.status{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:7px}.dot{width:8px;height:8px;border-radius:50%;background:var(--red)}.dot.ok{background:var(--green);box-shadow:0 0 10px #31d17c}.dot.warn{background:var(--yellow)}
-main{max-width:1600px;margin:auto;padding:24px}.hero{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:20px}.hero h2{font-size:28px;margin:0 0 5px}.hero p{margin:0;color:var(--muted);font-size:13px}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:14px}.grid.two{grid-template-columns:1fr 2fr;align-items:stretch}.card{background:linear-gradient(180deg,#151515,#101010);border:1px solid var(--line);border-radius:14px;padding:17px;box-shadow:var(--shadow)}.label{font-size:11px;text-transform:uppercase;letter-spacing:.09em;color:var(--muted)}.value{font-size:28px;font-weight:800;margin-top:8px}.sub{font-size:12px;color:var(--muted);margin-top:5px}.accent{color:var(--orange2)}.wide{grid-column:span 2}.charts{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.chartbox{height:280px}.chartbox.tall{height:330px}.section{margin:26px 0 11px;font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#ddd}.bars{display:grid;gap:12px;margin-top:16px}.barrow{display:grid;grid-template-columns:170px 1fr 80px;align-items:center;gap:12px;font-size:12px}.track{height:9px;background:#252525;border-radius:99px;overflow:hidden}.fill{height:100%;background:linear-gradient(90deg,#ff4f00,var(--orange2));border-radius:99px;width:0}.tablewrap{overflow:auto}.table{width:100%;border-collapse:collapse;font-size:12px}.table th,.table td{padding:12px 14px;border-bottom:1px solid #2a2a2a;text-align:left;white-space:nowrap}.table th{color:#cfcfcf;font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.05em;background:#181818;position:sticky;top:0}.table tr:hover td{background:#141414}.pill{padding:4px 8px;border-radius:999px;background:#1e1e1e}.good{color:var(--green)}.bad{color:var(--red)}.muted{color:var(--muted)}.empty{color:var(--muted);padding:30px;text-align:center}.footer{padding:25px 0 10px;color:#666;font-size:11px;text-align:center}@media(max-width:1100px){.grid{grid-template-columns:repeat(2,1fr)}.grid.two{grid-template-columns:1fr}.charts{grid-template-columns:1fr}}@media(max-width:700px){.top{align-items:flex-start;flex-direction:column}.controls{justify-content:flex-start}.input{min-width:0;width:100%}.grid{grid-template-columns:1fr}.wide{grid-column:span 1}main{padding:15px}}
+.top{max-width:1700px;margin:auto;padding:18px 24px;display:flex;gap:18px;align-items:center;justify-content:space-between}.brand{display:flex;align-items:center;gap:13px}.logo{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,var(--orange),#ff4f00);display:grid;place-items:center;font-weight:900;color:#090909;box-shadow:0 0 28px #ff720044}.brand h1{font-size:18px;margin:0}.brand span{font-size:12px;color:var(--muted)}
+.controls{display:flex;gap:9px;flex-wrap:wrap;justify-content:flex-end;align-items:center}.input{background:#111;border:1px solid #333;color:white;border-radius:9px;padding:10px 12px;min-width:330px;outline:none}.input:focus{border-color:var(--orange)}button,select{background:#191919;color:#eee;border:1px solid #343434;border-radius:9px;padding:10px 13px;cursor:pointer}button:hover{border-color:var(--orange);color:#fff}.primary{background:var(--orange);color:#090909;border-color:var(--orange);font-weight:800}.primary:hover{background:var(--orange2);color:#090909}.status{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:7px}.dot{width:8px;height:8px;border-radius:50%;background:var(--red)}.dot.ok{background:var(--green);box-shadow:0 0 10px #31d17c}.dot.warn{background:var(--yellow)}
+main{max-width:1700px;margin:auto;padding:24px}.hero{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:20px;flex-wrap:wrap;gap:14px}.hero h2{font-size:28px;margin:0 0 5px}.hero p{margin:0;color:var(--muted);font-size:13px}.hero-tools{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:14px}.grid.two{grid-template-columns:1fr 2fr;align-items:stretch}.grid.three{grid-template-columns:repeat(3,1fr)}.card{background:linear-gradient(180deg,#151515,#101010);border:1px solid var(--line);border-radius:14px;padding:17px;box-shadow:var(--shadow);position:relative}.card .label{font-size:11px;text-transform:uppercase;letter-spacing:.09em;color:var(--muted);display:flex;align-items:center;gap:6px}.value{font-size:28px;font-weight:800;margin-top:8px}.value.sm{font-size:18px}.sub{font-size:12px;color:var(--muted);margin-top:5px}.accent{color:var(--orange2)}.wide{grid-column:span 2}.charts{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.chartbox{height:260px}.chartbox.tall{height:320px}.section{margin:26px 0 11px;font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#ddd;display:flex;align-items:center;gap:10px}
+.bars{display:grid;gap:12px;margin-top:16px}.barrow{display:grid;grid-template-columns:160px 1fr 90px;align-items:center;gap:12px;font-size:12px}.track{height:9px;background:#252525;border-radius:99px;overflow:hidden}.fill{height:100%;background:linear-gradient(90deg,#ff4f00,var(--orange2));border-radius:99px;width:0}.fill.green{background:linear-gradient(90deg,#1f9d5c,var(--green))}.fill.yellow{background:linear-gradient(90deg,#c7941f,var(--yellow))}.fill.red{background:linear-gradient(90deg,#b03030,var(--red))}.fill.blue{background:linear-gradient(90deg,#2e6fc4,var(--blue))}.fill.purple{background:linear-gradient(90deg,#7849c4,var(--purple))}
+.tablewrap{overflow:auto}.table{width:100%;border-collapse:collapse;font-size:12px}.table th,.table td{padding:12px 14px;border-bottom:1px solid #2a2a2a;text-align:left;white-space:nowrap}.table th{color:#cfcfcf;font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.05em;background:#181818;position:sticky;top:0}.table tr:hover td{background:#141414}.pill{padding:4px 8px;border-radius:999px;background:#1e1e1e}.good{color:var(--green)}.bad{color:var(--red)}.muted{color:var(--muted)}.empty{color:var(--muted);padding:30px;text-align:center}.footer{padding:25px 0 10px;color:#666;font-size:11px;text-align:center}
+/* tip + tooltip */
+.tip{display:inline-grid;place-items:center;width:14px;height:14px;border-radius:50%;background:#2a2a2a;color:#aaa;font-size:10px;cursor:help;user-select:none;font-weight:700;line-height:1}.tip:hover{background:var(--orange);color:#000}
+[data-tip]{position:relative}[data-tip]:hover::after{content:attr(data-tip);position:absolute;left:0;bottom:calc(100% + 6px);z-index:50;max-width:340px;min-width:200px;padding:10px 12px;background:#1a1a1a;border:1px solid #3a3a3a;border-radius:8px;color:#e8e8e8;font-size:12px;line-height:1.45;font-weight:400;text-transform:none;letter-spacing:0;box-shadow:0 8px 24px #000a;white-space:pre-wrap;pointer-events:none}
+/* status pill */
+.status-pill{display:inline-flex;align-items:center;gap:7px;padding:6px 12px;border-radius:999px;font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;border:1px solid #333;background:#1a1a1a}.status-pill .d{width:8px;height:8px;border-radius:50%}.status-pill.ok{color:var(--green);border-color:#1f4a30;background:#0f1f17}.status-pill.ok .d{background:var(--green);box-shadow:0 0 10px #31d17c}.status-pill.warn{color:var(--yellow);border-color:#4a3f1a;background:#1f1a0c}.status-pill.warn .d{background:var(--yellow)}.status-pill.bad{color:var(--red);border-color:#4a1d1d;background:#1f0c0c}.status-pill.bad .d{background:var(--red);box-shadow:0 0 10px #ff4d4d}.status-pill.idle{color:var(--muted);border-color:#333;background:#161616}.status-pill.idle .d{background:#777}
+/* tiles row */
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}.tiles3{grid-template-columns:repeat(3,1fr)}.tiles2{grid-template-columns:repeat(2,1fr)}.tiles6{grid-template-columns:repeat(6,1fr)}.subtile{background:#161616;border:1px solid #232323;border-radius:10px;padding:11px 12px}.subtile .lbl{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);display:flex;align-items:center;gap:5px}.subtile .val{font-size:20px;font-weight:800;margin-top:4px;line-height:1.15}.subtile .unit{font-size:11px;color:var(--muted);font-weight:600;margin-left:3px}.subtile.ok .val{color:var(--green)}.subtile.warn .val{color:var(--yellow)}.subtile.bad .val{color:var(--red)}.subtile.idle .val{color:var(--muted)}
+/* stacked bar */
+.stackbar{height:14px;border-radius:99px;overflow:hidden;background:#1a1a1a;display:flex;border:1px solid #252525}.stackbar .seg{height:100%;transition:width .3s ease}.seg-weight{background:linear-gradient(90deg,#6e3aa8,#b48cff)}.seg-kv{background:linear-gradient(90deg,#1f6fc4,#5aa6ff)}.seg-graph{background:linear-gradient(90deg,#1f9d5c,#31d17c)}.seg-free{background:#1f1f1f}.stacklegend{display:flex;flex-wrap:wrap;gap:14px;margin-top:10px;font-size:12px;color:#bbb}.stacklegend span{display:flex;align-items:center;gap:6px}.stacklegend i{width:10px;height:10px;border-radius:3px;display:inline-block}
+/* percent rows */
+.prow{display:grid;grid-template-columns:160px 1fr 70px;align-items:center;gap:12px;font-size:12px;margin-top:10px}
+/* P50/P95/P99 chips */
+.pp{display:inline-grid;grid-template-columns:auto 1fr;gap:6px;font-size:11px;align-items:baseline;padding:6px 8px;background:#161616;border:1px solid #232323;border-radius:8px}.pp b{color:#fff;font-weight:700;font-size:13px}.pp .k{color:var(--muted);text-transform:uppercase;letter-spacing:.05em;font-size:10px}.pprow{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+/* details (advanced) */
+details.adv{border:1px solid var(--line);border-radius:14px;background:linear-gradient(180deg,#151515,#101010);padding:0;overflow:hidden}details.adv>summary{list-style:none;cursor:pointer;padding:14px 17px;font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#ddd;display:flex;align-items:center;gap:8px}details.adv>summary::-webkit-details-marker{display:none}details.adv>summary::before{content:"▸";color:var(--orange);transition:transform .15s}details.adv[open]>summary::before{transform:rotate(90deg)}details.adv .body{padding:0 17px 17px}
+.search{width:100%;background:#111;border:1px solid #2a2a2a;color:white;border-radius:8px;padding:8px 10px;margin-bottom:10px;font-size:12px}
+/* hero status row */
+.healthrow{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:6px}
+/* KPI strip (4 at-a-glance tiles) */
+.grid.four-kpi{grid-template-columns:repeat(4,1fr);margin-bottom:14px}
+.kpi{padding:14px 16px}
+/* dropdown used for window */
+.segsel{display:inline-flex;background:#161616;border:1px solid #2a2a2a;border-radius:9px;overflow:hidden}.segsel button{background:transparent;border:0;color:var(--muted);padding:6px 10px;font-size:11px;font-weight:700;letter-spacing:.05em}.segsel button.on{background:#2a1a08;color:var(--orange)}
+@media(max-width:1200px){.grid{grid-template-columns:repeat(2,1fr)}.grid.two{grid-template-columns:1fr}.grid.three{grid-template-columns:1fr}.grid.four-kpi{grid-template-columns:repeat(2,1fr)}.charts{grid-template-columns:1fr}.tiles,.tiles3,.tiles2,.tiles6{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:700px){.top{align-items:flex-start;flex-direction:column}.controls{justify-content:flex-start}.input{min-width:0;width:100%}.grid{grid-template-columns:1fr}.wide{grid-column:span 1}.tiles,.tiles3,.tiles2,.tiles6{grid-template-columns:1fr 1fr}main{padding:15px}}
 </style>
 </head>
 <body>
@@ -27,194 +55,459 @@ main{max-width:1600px;margin:auto;padding:24px}.hero{display:flex;justify-conten
 </div></header>
 
 <main>
-<div class="hero"><div><h2>Inference Control Room</h2><p id="endpoint">Enter a Prometheus-compatible SGLang <b>/metrics</b> endpoint.</p></div><div class="muted" id="updated">—</div></div>
-
-<div class="grid">
-  <div class="card"><div class="label">Running Requests</div><div class="value accent" id="running">—</div><div class="sub">currently executing</div></div>
-  <div class="card"><div class="label">Queued Requests</div><div class="value" id="queued">—</div><div class="sub">waiting for scheduler</div></div>
-  <div class="card"><div class="label">KV Token Usage</div><div class="value" id="kvusage">—</div><div class="sub" id="kvcap">—</div></div>
-  <div class="card"><div class="label">Generation Throughput</div><div class="value" id="throughput">—</div><div class="sub">tokens / second</div></div>
+<div class="hero">
+  <div><h2>Inference Control Room</h2><p id="endpoint">Enter a Prometheus-compatible SGLang <b>/metrics</b> endpoint.</p>
+    <div class="healthrow" id="healthrow"></div>
+  </div>
+  <div class="hero-tools">
+    <div class="segsel" id="windowSel">
+      <button data-w="15">15s</button><button data-w="60" class="on">1m</button><button data-w="300">5m</button><button data-w="900">15m</button>
+    </div>
+    <div class="muted" id="updated">—</div>
+  </div>
 </div>
 
-<div class="grid">
-  <div class="card"><div class="label">GPU KV Cache</div><div class="value" id="gpuKV">—</div><div class="sub" id="gpuKVSub">memory usage</div><div class="bars"><div class="barrow"><span>Utilization</span><div class="track"><div class="fill" id="gpuBar"></div></div><b id="gpuPct">—</b></div></div></div>
-  <div class="card"><div class="label">HiCache Backup</div><div class="value" id="backup">—</div><div class="sub">GPU → host cumulative tokens</div><div class="bars"><div class="barrow"><span>Bytes backed up</span><div class="track"><div class="fill" id="backupBar"></div></div><b id="backupBytes">—</b></div></div></div>
-  <div class="card"><div class="label">Host Load Back</div><div class="value" id="loadback">—</div><div class="sub">host → GPU cumulative tokens</div></div>
-  <div class="card"><div class="label">Cache Hit Rate</div><div class="value" id="hit">—</div><div class="sub" id="hitSub">device + host reuse</div></div>
+<!-- 1. System Health -->
+<div class="card" style="margin-bottom:14px" id="healthCard">
+  <div class="label" data-tip="Overall status derived from request load, queueing, cache pressure, and host-pressure drops. Thresholds are dashboard heuristics, not SGLang's own alerts.">System Health<span class="tip">i</span></div>
+  <div class="healthrow" id="healthTiles"></div>
 </div>
 
-<div class="section">Live Scheduler & Cache</div>
-<div class="charts">
-  <div class="card"><div class="label">Requests</div><div class="chartbox"><canvas id="reqChart"></canvas></div></div>
-  <div class="card"><div class="label">KV Utilization</div><div class="chartbox"><canvas id="kvChart"></canvas></div></div>
-  <div class="card"><div class="label">Throughput</div><div class="chartbox"><canvas id="tpChart"></canvas></div></div>
-  <div class="card"><div class="label">HiCache Transfers <span class="muted">• live delta/s</span></div><div class="chartbox"><canvas id="hcChart"></canvas></div></div>
+<!-- 2. At-a-glance "Now" strip + 3. Live charts -->
+<div class="grid four-kpi">
+  <div class="card kpi"><div class="label" data-tip="Requests currently being processed by the model. Together with the Queue number, tells you how loaded the scheduler is.">Running <span class="tip">i</span></div><div class="value accent" id="running">—</div><div class="sub">currently executing</div></div>
+  <div class="card kpi"><div class="label" data-tip="Requests waiting for the scheduler. Stays >0 while Running is at capacity = overloaded or stalled on cache pressure.">Queued <span class="tip">i</span></div><div class="value" id="queued">—</div><div class="sub">waiting for scheduler</div></div>
+  <div class="card kpi"><div class="label" data-tip="Output tokens per second the server is producing right now. 0 when idle.">Throughput <span class="tip">i</span></div><div class="value" id="throughput">—</div><div class="sub">tokens / second</div></div>
+  <div class="card kpi"><div class="label" data-tip="Time-to-first-token. How long a user waits before the first generated token appears.">TTFT <span class="tip">i</span></div><div class="value sm" id="ttftVal">—</div><div class="pprow" id="ttftPp"></div></div>
+</div>
+<div class="charts" style="margin-top:14px">
+  <div class="card"><div class="label">Running vs Queued <span class="muted" style="font-weight:500;text-transform:none;letter-spacing:0">• last window</span></div><div class="chartbox"><canvas id="reqChart"></canvas></div></div>
+  <div class="card"><div class="label">Throughput <span class="muted" style="font-weight:500;text-transform:none;letter-spacing:0">• last window</span></div><div class="chartbox"><canvas id="tpChart"></canvas></div></div>
 </div>
 
-<div class="section">Cache Effectiveness</div>
+<!-- 4. GPU KV Cache (the central question) -->
+<div class="section">GPU KV Cache <span class="muted" style="font-weight:500;text-transform:none;letter-spacing:0">— ACTIVE (in use) · EVICTABLE (cached) · FREE (empty)</span></div>
+<div class="card">
+  <div class="tiles tiles6" id="kvTiles"></div>
+  <div style="margin-top:14px">
+    <div class="prow"><span data-tip="How much of the GPU KV-cache pool currently contains data, including reusable cached data. If this stays near 100%, new work may need eviction or HiCache transfers.">Pool occupancy<span class="tip">i</span></span><div class="track"><div class="fill" id="occBar"></div></div><b id="occPct">—</b></div>
+    <div class="prow"><span data-tip="Share of the GPU KV-cache pool currently needed by running requests. 0% does NOT mean the cache is empty — it just means nothing is in-flight.">Active usage<span class="tip">i</span></span><div class="track"><div class="fill green" id="actBar"></div></div><b id="actPct">—</b></div>
+    <div class="prow"><span data-tip="Share of the GPU KV-cache pool that holds cached prefixes not currently required by running requests. SGLang can drop these to free space.">Evictable<span class="tip">i</span></span><div class="track"><div class="fill blue" id="evBar"></div></div><b id="evPct">—</b></div>
+  </div>
+</div>
+
+<!-- 5. GPU Memory breakdown -->
+<div class="section">GPU Memory <span class="muted" style="font-weight:500;text-transform:none;letter-spacing:0">— how GPU memory is split between weights, KV cache, CUDA graphs, and free space</span></div>
+<div class="card" id="gpuMemCard">
+  <div class="stackbar" id="stackbar"><div class="seg seg-weight" id="segW"></div><div class="seg seg-kv" id="segK"></div><div class="seg seg-graph" id="segG"></div><div class="seg seg-free" id="segF"></div></div>
+  <div class="stacklegend">
+    <span><i style="background:#b48cff"></i>Weights <b id="memW">—</b></span>
+    <span><i style="background:#5aa6ff"></i>KV Cache <b id="memK">—</b></span>
+    <span><i style="background:#31d17c"></i>CUDA Graph <b id="memG">—</b></span>
+    <span><i style="background:#1f1f1f;border:1px solid #333"></i>Available <b id="memF">—</b></span>
+  </div>
+  <div class="muted" id="memWarn" style="margin-top:10px;font-size:11px"></div>
+</div>
+
+<!-- 6. Host HiCache + 7. HiCache Transfers (the off-GPU tier) -->
+<div class="section">Host HiCache &amp; Transfers <span class="muted" style="font-weight:500;text-transform:none;letter-spacing:0">— KV stored outside the GPU + movement between tiers</span></div>
 <div class="grid two">
-  <div class="card"><div class="label">HiCache Counters</div><div class="value" id="drops">—</div><div class="sub">dropped tokens</div><div class="sub" id="dropDetail">—</div></div>
-  <div class="card"><div class="label">Prefill Effective Tokens</div><div class="bars">
-    <div class="barrow"><span>Input / miss</span><div class="track"><div class="fill" id="inputBar"></div></div><b id="inputVal">—</b></div>
-    <div class="barrow"><span>Device hit</span><div class="track"><div class="fill" id="devBar"></div></div><b id="devVal">—</b></div>
-    <div class="barrow"><span>Host HiCache hit</span><div class="track"><div class="fill" id="hostBar"></div></div><b id="hostVal">—</b></div>
-    <div class="barrow"><span>Storage hit</span><div class="track"><div class="fill" id="storeBar"></div></div><b id="storeVal">—</b></div>
-  </div></div>
+  <div class="card">
+    <div class="label" data-tip="KV cache stored outside the GPU (typically CPU RAM). Not the same as total system RAM.">Host KV HiCache<span class="tip">i</span></div>
+    <div class="tiles tiles3" id="hostTiles" style="margin-top:10px"></div>
+    <div class="prow" style="margin-top:12px"><span data-tip="Share of the configured host HiCache pool that is currently holding KV tokens. High utilization means the host tier is full.">Host utilization<span class="tip">i</span></span><div class="track"><div class="fill" id="hostBar"></div></div><b id="hostPct">—</b></div>
+  </div>
+  <div class="card">
+    <div class="label" data-tip="Cumulative tokens moved GPU → host, bytes moved, current rate, tokens moved back, current rate, and any host-pressure drops. Should be 0 in a healthy system.">HiCache Transfers <span class="tip">i</span></div>
+    <div class="grid" style="grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px">
+      <div class="subtile idle"><div class="lbl" data-tip="Cumulative number of KV tokens moved from GPU to host cache since startup. Counter — shows TOTAL since startup, not current cache size.">GPU → Host tokens <span class="tip">i</span></div><div class="val" id="backupTok">—</div><div class="muted" style="font-size:11px">since startup</div></div>
+      <div class="subtile idle"><div class="lbl" data-tip="Cumulative bytes moved GPU → host. Divided by hicache_backup_duration_seconds_sum, gives the achieved D→H bandwidth while transferring.">GPU → Host bytes <span class="tip">i</span></div><div class="val" id="backupBytes">—</div><div class="muted" style="font-size:11px">since startup</div></div>
+      <div class="subtile idle"><div class="lbl" data-tip="Live transfer rate, derived from the change in the backup counter between polls.">Backup rate (now) <span class="tip">i</span></div><div class="val" id="backupRate">—<span class="unit">tok/s</span></div><div class="muted" style="font-size:11px">live rate</div></div>
+      <div class="subtile idle"><div class="lbl" data-tip="Cumulative number of KV tokens moved from host cache back to GPU since startup.">Host → GPU tokens <span class="tip">i</span></div><div class="val" id="loadbackTok">—</div><div class="muted" style="font-size:11px">since startup</div></div>
+      <div class="subtile idle"><div class="lbl" data-tip="Live load-back rate.">Load-back rate (now) <span class="tip">i</span></div><div class="val" id="loadRate">—<span class="unit">tok/s</span></div><div class="muted" style="font-size:11px">live rate</div></div>
+      <div class="subtile idle"><div class="lbl" data-tip="KV tokens destroyed without a host backup — typically because the host cache was under pressure. Should be 0 in a healthy system.">Host pressure drops <span class="tip">i</span></div><div class="val" id="drops">—</div><div class="muted" style="font-size:11px" id="dropDetail">since startup</div></div>
+    </div>
+  </div>
+</div>
+<div class="charts" style="margin-top:14px">
+  <div class="card"><div class="label">Transfer rates <span class="muted" style="font-weight:500;text-transform:none;letter-spacing:0">• tokens / second</span></div><div class="chartbox"><canvas id="hcChart"></canvas></div></div>
+  <div class="card"><div class="label">KV pool breakdown <span class="muted" style="font-weight:500;text-transform:none;letter-spacing:0">• active vs evictable vs free</span></div><div class="chartbox"><canvas id="kvChart"></canvas></div></div>
 </div>
 
-<div class="section">Prometheus Metrics Snapshot</div>
-<div class="card tablewrap"><table class="table"><thead><tr><th>Metric</th><th>Value</th><th>Labels</th></tr></thead><tbody id="table"><tr><td colspan="3" class="empty">Connect to a metrics endpoint.</td></tr></tbody></table></div>
-<div class="footer">Ornith SGLang Live Dashboard • Polls the configured Prometheus exposition endpoint directly</div>
+<!-- 8. Cache Effectiveness -->
+<div class="section">Cache Effectiveness</div>
+<div class="grid">
+  <div class="card"><div class="label" data-tip="Windowed cache hit rate computed from the change in prefill_effective_tokens_total counters. Distinct from SGLang's own gauge, which can read 0 simply because the server is idle.">Windowed hit rate <span class="tip">i</span></div><div class="value" id="hitWindow">—</div><div class="sub" id="hitWindowSub">over the active window</div></div>
+  <div class="card"><div class="label" data-tip="SGLang's own reported cache_hit_rate gauge. Useful as a point-in-time reading, but can be 0 on an idle server.">Reported hit rate <span class="tip">i</span></div><div class="value" id="hit">—</div><div class="sub" id="hitSub">SGLang gauge</div></div>
+  <div class="card wide" style="grid-column:span 2"><div class="label">Prefill Effective Tokens (since startup) <span class="muted" style="font-weight:500;text-transform:none;letter-spacing:0">• cumulative</span></div>
+    <div class="bars">
+      <div class="barrow"><span data-tip="Tokens that had to be computed from scratch. The 'miss' portion of prefill.">Input / miss<span class="tip">i</span></span><div class="track"><div class="fill" id="inputBar"></div></div><b id="inputVal">—</b></div>
+      <div class="barrow"><span data-tip="Tokens whose prefix was already cached on the GPU.">Device hit<span class="tip">i</span></span><div class="track"><div class="fill green" id="devBar"></div></div><b id="devVal">—</b></div>
+      <div class="barrow"><span data-tip="Tokens whose prefix was found in the host HiCache and had to be loaded back to GPU.">Host HiCache hit<span class="tip">i</span></span><div class="track"><div class="fill blue" id="hostBar2"></div></div><b id="hostVal">—</b></div>
+      <div class="barrow"><span data-tip="Tokens whose prefix was found in a persistent storage tier.">Storage hit<span class="tip">i</span></span><div class="track"><div class="fill purple" id="storeBar"></div></div><b id="storeVal">—</b></div>
+    </div>
+  </div>
+</div>
+
+<!-- 9. Requests & Scheduler (sub-queues) -->
+<div class="section">Scheduler Sub-queues <span class="muted" style="font-weight:500;text-transform:none;letter-spacing:0">— where queued work is actually stuck</span></div>
+<div class="card">
+  <div class="label" data-tip="How queued requests are split across the scheduler's sub-queues. A non-zero value here means work is stuck at that stage instead of running.">Sub-queues <span class="tip">i</span></div>
+  <div class="tiles tiles6" id="subqTiles" style="margin-top:10px"></div>
+</div>
+
+<!-- 10. Latency (TTFT already shown above; here: TPOT, Queue, Spec) -->
+<div class="section">Latency <span class="muted" style="font-weight:500;text-transform:none;letter-spacing:0">— per-token and queue timings from SGLang's histograms</span></div>
+<div class="grid three">
+  <div class="card"><div class="label" data-tip="Time per output token — average time between generated tokens after generation begins. Lower is faster.">TPOT <span class="tip">i</span></div><div class="value sm" id="tpotVal">—</div><div class="pprow" id="tpotPp"></div></div>
+  <div class="card"><div class="label" data-tip="How long a request waits in the scheduler queue before actual processing starts.">Queue time <span class="tip">i</span></div><div class="value sm" id="queueVal">—</div><div class="pprow" id="queuePp"></div></div>
+  <div class="card"><div class="label" data-tip="Acceptance rate and mean acceptance length of speculative decoding. 0 means speculative decoding is currently inactive.">Speculative decoding <span class="tip">i</span></div><div class="value sm" id="specVal">—</div><div class="sub" id="specSub">—</div></div>
+</div>
+
+<!-- 11. Mamba (only if exposed) -->
+<div class="section">Mamba Cache <span class="muted" style="font-weight:500;text-transform:none;letter-spacing:0">— recurrent-state pool, separate from attention KV</span></div>
+<div class="card" id="mambaCard">
+  <div id="mambaBody"></div>
+</div>
+
+<!-- 12. Advanced (raw) -->
+<div class="section">Advanced <span class="muted" style="font-weight:500;text-transform:none;letter-spacing:0">— raw Prometheus exposition, for debugging</span></div>
+<details class="adv"><summary>Raw Metrics</summary><div class="body">
+  <input id="rawSearch" class="search" placeholder="Filter by metric name or label (e.g. kv_used, pool=kv)">
+  <div class="tablewrap"><table class="table"><thead><tr><th>Metric</th><th>Value</th><th>Labels</th></tr></thead><tbody id="table"><tr><td colspan="3" class="empty">Connect to a metrics endpoint.</td></tr></tbody></table></div>
+</div></details>
+
+<div class="footer">Ornith SGLang Live Dashboard • Polls the configured Prometheus exposition endpoint directly • Status thresholds are dashboard heuristics, not SGLang's own alerts.</div>
 </main>
 
 <script>
-const state={running:true, timer:null, last:null, hist:{t:[],r:[],q:[],kv:[],tp:[],back:[],load:[]}};
-const wanted=['num_running_reqs','num_queue_reqs','token_usage','max_total_num_tokens','gen_throughput','cache_hit_rate','kv_cache_memory_usage_gb','hicache_backup_tokens_total','hicache_backup_bytes_total','load_back_tokens_total','hicache_dropped_tokens_total','prefill_effective_tokens_total'];
-const colors={orange:'#ff7a00',muted:'#aaa',grid:'#3a3a3a',text:'#e8e8e8',axis:'#cfcfcf'};
+const state={running:true,timer:null,last:null,
+  hist:{t:[],r:[],q:[],tp:[],back:[],load:[],active:[],evictable:[],free:[]},
+  prevCounters:null,rawFilter:'',window:60};
+const wanted=['num_running_reqs','num_queue_reqs','token_usage','max_total_num_tokens','gen_throughput','cache_hit_rate','kv_cache_memory_usage_gb','kv_used_tokens','kv_evictable_tokens','kv_available_tokens','hicache_host_used_tokens','hicache_host_total_tokens','hicache_backup_tokens_total','hicache_backup_bytes_total','load_back_tokens_total','hicache_dropped_tokens_total','prefill_effective_tokens_total','cached_tokens_total','weight_memory_usage_gb','graph_memory_usage_gb','startup_available_gpu_memory_gb','mamba_used_tokens','mamba_available_tokens','mamba_evictable_tokens','mamba_usage','spec_accept_length','spec_accept_rate','per_stage_req_latency_seconds','queue_time_seconds','evicted_tokens_total','prompt_tokens_total','generation_tokens_total','num_prefill_bootstrap_queue_reqs','num_prefill_inflight_queue_reqs','num_decode_prealloc_queue_reqs','num_decode_transfer_queue_reqs','num_grammar_queue_reqs'];
+const colors={grid:'#3a3a3a',text:'#e8e8e8',axis:'#cfcfcf',palette:['#ff7a00','#5aa6ff','#31d17c','#b48cff','#f5c542','#ff4d4d']};
 function esc(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
-function fmt(n,d=1){if(n==null||Number.isNaN(n))return '—';return Intl.NumberFormat('en-US',{maximumFractionDigits:d}).format(n)}
-function bytes(n){if(n==null)return '—';let u=['B','KB','MB','GB','TB'],i=0;while(Math.abs(n)>=1024&&i<4){n/=1024;i++}return `${fmt(n,2)} ${u[i]}`}
+function safeNaN(n){return (n==null||Number.isNaN(n))?null:n}
+function fmt(n,d=1){const v=safeNaN(n);if(v==null)return '—';return Intl.NumberFormat('en-US',{maximumFractionDigits:d}).format(v)}
+function fmtPct(n,d=1){const v=safeNaN(n);if(v==null)return '—';return (v*100).toFixed(d)+'%'}
+function bytes(n){const v=safeNaN(n);if(v==null)return '—';let u=['B','KB','MB','GB','TB'],i=0,x=v;while(Math.abs(x)>=1024&&i<4){x/=1024;i++}return `${fmt(x,2)} ${u[i]}`}
+function humanTokens(n){const v=safeNaN(n);if(v==null)return '—';const a=Math.abs(v);if(a>=1e9)return fmt(v/1e9,2)+'B';if(a>=1e6)return fmt(v/1e6,2)+'M';if(a>=1e3)return fmt(v/1e3,1)+'K';return fmt(v,0)}
 function parseProm(text){
  const out={}; for(const line of text.split(/\r?\n/)){if(!line||line[0]==='#')continue;
-   const m=line.match(/^([a-zA-Z_:][a-zA-Z0-9_:]*)(\{[^}]*\})?\s+([-+]?[\d.eE+-]+)$/); if(!m)continue;
-   const name=m[1], labels=m[2]||'', val=Number(m[3]); if(!out[name])out[name]=[]; out[name].push({labels,value:val});
+   const m=line.match(/^([a-zA-Z_:][a-zA-Z0-9_:]*)(\{[^}]*\})?\s+([-+]?[\d.eE+-]+|NaN)$/); if(!m)continue;
+   const raw=m[3]; const val=raw==='NaN'?NaN:Number(raw); if(!out[m[1]])out[m[1]]=[]; out[m[1]].push({labels:m[2]||'',value:val});
  } return out;
 }
-function first(p,n,filter=''){if(!p[n])return null;let x=p[n].find(x=>!filter||x.labels.includes(filter))||p[n][0];return x?.value??null}
-function sum(p,n){return p[n]?.reduce((a,x)=>a+x.value,0)??null}
-function metric(p,short){let n=Object.keys(p).find(k=>k===`sglang:${short}`||k.endsWith(`_${short}`)||k===short);return n?sum(p,n):null}
-function metricFirst(p,short,filter=''){let n=Object.keys(p).find(k=>k===`sglang:${short}`||k.endsWith(`_${short}`)||k===short);return n?first(p,n,filter):null}
-function set(id,v){document.getElementById(id).textContent=v}
-function chart(id,label,labels,datasets,units=''){return new Chart(document.getElementById(id),{type:'line',data:{labels,datasets:datasets.map((d,i)=>({label:d.label,data:d.data,borderColor:i?'#bbb':colors.orange,backgroundColor:'transparent',borderWidth:2.2,pointRadius:0,tension:.28}))},options:{responsive:true,maintainAspectRatio:false,animation:false,plugins:{legend:{labels:{color:colors.text,font:{size:12,weight:'600'},boxWidth:14,padding:10}},tooltip:{titleColor:'#fff',bodyColor:'#fff',backgroundColor:'#1a1a1a',borderColor:'#444',borderWidth:1,callbacks:{label:c=>` ${c.dataset.label}: ${fmt(c.parsed.y,1)}${units?' '+units:''}`}}},scales:{x:{ticks:{color:colors.axis,font:{size:11},maxTicksLimit:8},grid:{color:colors.grid}},y:{beginAtZero:true,ticks:{color:colors.axis,font:{size:11},callback:v=>fmt(v)},grid:{color:colors.grid},title:{display:!!units,text:units,color:colors.muted,font:{size:10,weight:'600'}}}}}})}
-let charts={};
-function initCharts(){for(const k of Object.keys(charts)){if(charts[k]){charts[k].destroy();delete charts[k]}}charts.req=chart('reqChart','',state.hist.t,[{label:'Running',data:state.hist.r},{label:'Queued',data:state.hist.q}],'reqs');charts.kv=chart('kvChart','',state.hist.t,[{label:'KV %',data:state.hist.kv}],'%');charts.tp=chart('tpChart','',state.hist.t,[{label:'Tokens/s',data:state.hist.tp}],'tok/s');charts.hc=chart('hcChart','',state.hist.t,[{label:'Backup tokens/s',data:state.hist.back},{label:'Load-back tokens/s',data:state.hist.load}],'tok/s')}
-function refreshCharts(){if(!charts.req)return;for(const c of Object.values(charts)){c.data.labels=state.hist.t;c.data.datasets[0].data=c===charts.req?state.hist.r:c===charts.kv?state.hist.kv:c===charts.tp?state.hist.tp:state.hist.back;if(c===charts.req)c.data.datasets[1].data=state.hist.q;if(c===charts.hc)c.data.datasets[1].data=state.hist.load;c.update()}}
-function pctBar(id,v){document.getElementById(id).style.width=Math.max(0,Math.min(100,v||0))+'%'}
-function update(p){
- const r=metricFirst(p,'num_running_reqs'),q=metricFirst(p,'num_queue_reqs'),u=metricFirst(p,'token_usage'),cap=metricFirst(p,'max_total_num_tokens'),tp=metricFirst(p,'gen_throughput');
- const kv=metricFirst(p,'kv_cache_memory_usage_gb'),hit=metricFirst(p,'cache_hit_rate');
- const bk=metricFirst(p,'hicache_backup_tokens_total','KV'),lb=metricFirst(p,'load_back_tokens_total','KV'),bb=metricFirst(p,'hicache_backup_bytes_total','KV'),dr=metricFirst(p,'hicache_dropped_tokens_total','KV');
- set('running',r==null?'—':fmt(r,0));set('queued',q==null?'—':fmt(q,0));set('kvusage',u==null?'—':(u*100).toFixed(1)+'%');set('kvcap',cap==null?'—':fmt(cap,0)+' max tokens');set('throughput',tp==null?'—':fmt(tp,1));
- set('gpuKV',kv==null?'—':fmt(kv,2)+' GB');set('gpuKVSub','SGLang reported KV memory');set('gpuPct',u==null?'—':(u*100).toFixed(1)+'%');pctBar('gpuBar',(u||0)*100);
- set('backup',bk==null?'—':fmt(bk,0));set('backupBytes',bb==null?'—':bytes(bb));set('loadback',lb==null?'—':fmt(lb,0));set('hit',hit==null?'—':(hit*100).toFixed(1)+'%');
- set('drops',dr==null?'—':fmt(dr,0));set('dropDetail',dr==null?'No KV drop counter found':'KV HiCache drops');
- const pe=Object.keys(p).find(k=>k.includes('prefill_effective_tokens_total'));
- if(pe){
-   const vals=p[pe];
-   const get=t=>vals.filter(v=>{
-     const l=v.labels||'';
-     return l.includes(`mode="${t}"`)||l.includes(`type="${t}"`)||l.includes(`token_type="${t}"`);
-   }).reduce((a,x)=>a+x.value,0);
-   const a=get('input')||0,b=get('device_hit')||0,c=get('host_hit')||0,d=get('storage_hit')||0,total=a+b+c+d;
-   [['input',a],['dev',b],['host',c],['store',d]].forEach(([x,v])=>{
-     set(x+'Val',fmt(v,0));
-     pctBar(x+'Bar',total?100*v/total:0)
-   });
+function findName(p,short){return Object.keys(p).find(k=>k===`sglang:${short}`||k.endsWith(`_${short}`)||k===short)||null}
+function firstByLabel(p,short,label,value){const n=findName(p,short);if(!n||!p[n])return null;const s=`${label}="${value}"`;const x=p[n].find(x=>(x.labels||'').includes(s));return safeNaN(x?.value)}
+function sumByLabel(p,short,label,value){const n=findName(p,short);if(!n||!p[n])return null;const s=`${label}="${value}"`;let t=0,any=false;for(const x of p[n]){if((x.labels||'').includes(s)){const v=safeNaN(x.value);if(v!=null){t+=v;any=true}}}return any?t:null}
+function pick(p,short){const n=findName(p,short);if(!n||!p[n])return null;return safeNaN(p[n][0].value)}
+function pickSum(p,short){const n=findName(p,short);if(!n||!p[n])return null;let t=0,any=false;for(const x of p[n]){const v=safeNaN(x.value);if(v!=null){t+=v;any=true}}return any?t:null}
+function set(id,v){const el=document.getElementById(id);if(el)el.textContent=v}
+function setWidth(id,v){const el=document.getElementById(id);if(el)el.style.width=Math.max(0,Math.min(100,v||0))+'%'}
+
+function parseHistogram(p,short){
+ const n=findName(p,short); if(!n||!p[n]) return null;
+ const byStage={};
+ for(const s of p[n]){
+   const lm=(s.labels||'').match(/le="([^"]+)"/); const sm=(s.labels||'').match(/stage="([^"]+)"/);
+   if(!lm) continue;
+   const stage=sm?sm[1]:'';
+   (byStage[stage]=byStage[stage]||[]).push({le:lm[1]==='+Inf'?Infinity:Number(lm[1]),v:safeNaN(s.value)});
  }
- const now=new Date(), label=now.toLocaleTimeString();
- state.hist.t.push(label);state.hist.r.push(r??0);state.hist.q.push(q??0);state.hist.kv.push(u!=null?u*100:0);state.hist.tp.push(tp??0);
- // HiCache counters are cumulative. Convert them to live transfer rates.
+ const out={};
+ for(const stage of Object.keys(byStage)){
+   const b=byStage[stage].sort((a,b)=>a.le-b.le);
+   if(b.length<2) continue;
+   const total=b[b.length-1].v; if(!total) continue;
+   const q=(p)=>{const target=p*total; let lo=b[0]; for(let i=0;i<b.length;i++){if(b[i].v>=target){const prev=i>0?b[i-1]:b[i]; const frac=(b[i].v-prev.v)===0?0:(target-prev.v)/(b[i].v-prev.v); return prev.le+frac*(b[i].le-prev.le)}} return b[b.length-1].le};
+   out[stage]={p50:q(0.5),p95:q(0.95),p99:q(0.99),count:total};
+ }
+ return Object.keys(out).length?out:null;
+}
+
+function compute(p){
+ const m={};
+ m.running=pick(p,'num_running_reqs');
+ m.queued=pick(p,'num_queue_reqs');
+ m.qBootstrap=pick(p,'num_prefill_bootstrap_queue_reqs');
+ m.qInflight=pick(p,'num_prefill_inflight_queue_reqs');
+ m.qPrealloc=pick(p,'num_decode_prealloc_queue_reqs');
+ m.qTransfer=pick(p,'num_decode_transfer_queue_reqs');
+ m.qGrammar=pick(p,'num_grammar_queue_reqs');
+ m.genTp=pick(p,'gen_throughput');
+ m.weightGB=pick(p,'weight_memory_usage_gb');
+ m.kvGB=pick(p,'kv_cache_memory_usage_gb');
+ m.graphGB=sumByLabel(p,'graph_memory_usage_gb','engine_type','unified');
+ m.startupAvailGB=pick(p,'startup_available_gpu_memory_gb');
+ m.kvCap=pick(p,'max_total_num_tokens');
+ m.kvUsed=pick(p,'kv_used_tokens');
+ m.kvEvictable=pick(p,'kv_evictable_tokens');
+ m.kvAvail=pick(p,'kv_available_tokens');
+ if(m.kvCap){m.poolOcc=((m.kvCap-(m.kvAvail??0))/m.kvCap);m.activePct=(m.kvUsed??0)/m.kvCap;m.evictablePct=(m.kvEvictable??0)/m.kvCap}
+ m.hostUsed=pick(p,'hicache_host_used_tokens');
+ m.hostTotal=pick(p,'hicache_host_total_tokens');
+ if(m.hostTotal){m.hostFree=m.hostTotal-(m.hostUsed??0);m.hostPct=(m.hostUsed??0)/m.hostTotal}
+ m.backupTok=sumByLabel(p,'hicache_backup_tokens_total','pool','kv') ?? pickSum(p,'hicache_backup_tokens_total');
+ m.backupBytes=pickSum(p,'hicache_backup_bytes_total');
+ m.loadBackTok=sumByLabel(p,'load_back_tokens_total','pool','kv') ?? pickSum(p,'load_back_tokens_total');
+ m.backupMamba=sumByLabel(p,'hicache_backup_tokens_total','pool','mamba');
+ m.loadMamba=sumByLabel(p,'load_back_tokens_total','pool','mamba');
+ m.evictTok=pickSum(p,'evicted_tokens_total');
+ m.dropTok=sumByLabel(p,'hicache_dropped_tokens_total','pool','kv') ?? pickSum(p,'hicache_dropped_tokens_total');
+ m.hitRate=pick(p,'cache_hit_rate');
+ const pe=findName(p,'prefill_effective_tokens_total');
+ if(pe){
+   const get=t=>{let t2=0,any=false;for(const v of p[pe]){const l=v.labels||'';if(l.includes(`mode="${t}"`)){const x=safeNaN(v.value);if(x!=null){t2+=x;any=true}}}return any?t2:0};
+   m.prefInput=get('input');m.prefDevHit=get('device_hit');m.prefHostHit=get('host_hit');m.prefStoreHit=get('storage_hit');
+ }
+ m.cachedDev=sumByLabel(p,'cached_tokens_total','cache_source','device');
+ m.cachedHost=sumByLabel(p,'cached_tokens_total','cache_source','host');
+ m.lat=parseHistogram(p,'per_stage_req_latency_seconds');
+ m.qt=parseHistogram(p,'queue_time_seconds');
+ m.specAcceptLen=pick(p,'spec_accept_length');
+ m.specAcceptRate=pick(p,'spec_accept_rate');
+ m.mambaUsed=pick(p,'mamba_used_tokens');
+ m.mambaAvail=pick(p,'mamba_available_tokens');
+ m.mambaEvict=pick(p,'mamba_evictable_tokens');
+ m.has={kvPool:m.kvCap!=null,hostCache:m.hostTotal!=null,mamba:m.mambaUsed!=null||m.mambaAvail!=null,histogram:!!m.lat,transfer:m.backupTok!=null||m.loadBackTok!=null};
+ return m;
+}
+
+function computeRates(m){
+ const now=performance.now();
  const prev=state.prevCounters;
- const dt=prev ? Math.max(0.25,(now-prev.t)/1000) : 0;
- const backRate=(prev && bk!=null && bk>=prev.bk) ? (bk-prev.bk)/dt : 0;
- const loadRate=(prev && lb!=null && lb>=prev.lb) ? (lb-prev.lb)/dt : 0;
- state.hist.back.push(backRate);state.hist.load.push(loadRate);
- state.prevCounters={t:now,bk:bk??0,lb:lb??0};
- if(state.hist.t.length>60)Object.values(state.hist).forEach(a=>a.shift()); refreshCharts();
- const rows=[];for(const n of Object.keys(p).filter(n=>wanted.some(w=>n.includes(w))).sort()){for(const x of p[n].slice(0,3))rows.push(`<tr><td>${esc(n)}</td><td>${esc(fmt(x.value,4))}</td><td class="muted">${esc(x.labels||'—')}</td></tr>`)}
+ if(prev){
+   const dt=Math.max(0.25,(now-prev.t)/1000);
+   const d=(a,b)=>safeNaN(a)!=null&&safeNaN(b)!=null?Math.max(0,((a-b)/dt)):0;
+   m.backupRate=d(m.backupTok,prev.bk); m.loadRate=d(m.loadBackTok,prev.lb);
+   m.evictRate=d(m.evictTok,prev.ev); m.dropRate=d(m.dropTok,prev.dr);
+   const dIn=Math.max(0,(m.prefInput??0)-(prev.pIn??0));
+   const dDev=Math.max(0,(m.prefDevHit??0)-(prev.pDev??0));
+   const dHost=Math.max(0,(m.prefHostHit??0)-(prev.pHost??0));
+   const dStore=Math.max(0,(m.prefStoreHit??0)-(prev.pStore??0));
+   const hits=dDev+dHost+dStore; const tot=hits+dIn;
+   m.hitWindow= tot>0 ? hits/tot : null;
+ } else {m.backupRate=m.loadRate=m.evictRate=m.dropRate=0; m.hitWindow=null}
+ state.prevCounters={t:now,bk:m.backupTok??0,lb:m.loadBackTok??0,ev:m.evictTok??0,dr:m.dropTok??0,pIn:m.prefInput??0,pDev:m.prefDevHit??0,pHost:m.prefHostHit??0,pStore:m.prefStoreHit??0};
+}
+
+function mkChart(canvasId,datasets,units){
+ const ctx=document.getElementById(canvasId);
+ const cfg={type:'line',data:{labels:[],datasets:datasets.map((d,i)=>({label:d.label,data:d.data,borderColor:d.color||colors.palette[i%colors.palette.length],backgroundColor:'transparent',borderWidth:2,pointRadius:0,tension:.28}))},options:{responsive:true,maintainAspectRatio:false,animation:false,plugins:{legend:{labels:{color:colors.text,font:{size:11,weight:'600'},boxWidth:12,padding:8}},tooltip:{titleColor:'fff',bodyColor:'fff',backgroundColor:'1a1a1a',borderColor:'444',borderWidth:1,callbacks:{label:c=>{const v=fmt(c.parsed.y,1)+(units?(' '+units):'');return ' '+c.dataset.label+': '+v}}}},scales:{x:{ticks:{color:colors.axis,font:{size:10},maxTicksLimit:6},grid:{color:colors.grid}},y:{beginAtZero:true,ticks:{color:colors.axis,font:{size:10},callback:v=>fmt(v)},grid:{color:colors.grid},title:units?{display:true,text:units,color:'aaa',font:{size:10}}:undefined}}}};
+ return new Chart(ctx,cfg);
+}
+let charts={};
+function initCharts(){
+ for(const k of Object.keys(charts)){if(charts[k]){charts[k].destroy();delete charts[k]}}
+ charts.req=mkChart('reqChart',[{label:'Running',data:state.hist.r},{label:'Queued',data:state.hist.q}],'reqs');
+ charts.tp=mkChart('tpChart',[{label:'Tokens/s',data:state.hist.tp}],'tok/s');
+ charts.hc=mkChart('hcChart',[{label:'Backup',data:state.hist.back},{label:'Load-back',data:state.hist.load}],'tok/s');
+ charts.kv=mkChart('kvChart',[{label:'Active',data:state.hist.active,color:colors.palette[1]},{label:'Evictable',data:state.hist.evictable,color:colors.palette[3]},{label:'Free',data:state.hist.free,color:colors.palette[2]}],'tokens');
+}
+function refreshCharts(){
+ if(!charts.req)return;
+ for(const c of Object.values(charts)){c.data.labels=state.hist.t;c.update('none')}
+}
+
+function tile(parentId,items){
+ const el=document.getElementById(parentId);if(!el)return;
+ el.innerHTML=items.map(it=>`<div class="subtile ${it.cls||''}"><div class="lbl">${it.l}${it.tip?`<span class="tip" data-tip="${it.tip}">i</span>`:''}</div><div class="val">${it.v}${it.u?`<span class="unit">${it.u}</span>`:''}</div>${it.s?`<div class="sub" style="font-size:11px">${it.s}</div>`:''}</div>`).join('');
+}
+
+function render(m,p){
+ const h=health(m);
+ document.getElementById('healthTiles').innerHTML=
+   `<span class="status-pill ${h.cls}"><span class="d"></span>${h.overall}</span>`+
+   h.reasons.map(r=>`<span class="muted" style="font-size:12px">• ${esc(r)}</span>`).join('');
+
+ const known=[m.weightGB,m.kvGB,m.graphGB].filter(v=>v!=null).reduce((a,b)=>a+b,0);
+ const avail=m.startupAvailGB ?? 0;
+ const total=Math.max(known+avail,1);
+ const pct=(v)=>((v||0)/total*100).toFixed(2)+'%';
+ setWidth('segW', m.weightGB!=null?pct(m.weightGB):'0%');
+ setWidth('segK', m.kvGB!=null?pct(m.kvGB):'0%');
+ setWidth('segG', m.graphGB!=null?pct(m.graphGB):'0%');
+ setWidth('segF', avail?pct(avail):'0%');
+ set('memW', m.weightGB!=null?fmt(m.weightGB,2)+' GB':'—');
+ set('memK', m.kvGB!=null?fmt(m.kvGB,2)+' GB':'—');
+ set('memG', m.graphGB!=null?fmt(m.graphGB,2)+' GB':'—');
+ set('memF', avail?fmt(avail,2)+' GB':'—');
+ set('memWarn', (m.weightGB==null&&m.kvGB==null&&m.graphGB==null)?'Not all GPU-memory metrics are exposed by this SGLang endpoint.':'');
+
+ tile('kvTiles',[
+  {l:'Capacity',v:fmt(m.kvCap,0),u:'tokens',cls:'idle',tip:'Total KV-cache slots the server configured for GPU memory. The pool is shared by Active, Evictable, and Free.'},
+  {l:'Active',v:fmt(m.kvUsed,0),u:'tokens',cls:((m.kvUsed||0)>0)?'ok':'idle',tip:'What is it? KV slots currently required by running requests. Why care? A small or zero value here does NOT mean the cache is empty — see Evictable.'},
+  {l:'Evictable',v:fmt(m.kvEvictable,0),u:'tokens',cls:(m.kvEvictable!=null&&m.kvEvictable>0)?'warn':'idle',tip:'What is it? Cached prefixes not currently required by any running request. Why care? SGLang can drop these to make room for new work.'},
+  {l:'Free',v:fmt(m.kvAvail,0),u:'tokens',cls:((m.kvAvail||0)<1000&&(m.kvCap||0)>0)?'bad':'ok',tip:'What is it? Empty KV slots ready for new work. Why care? A persistently low free count means the system is under pressure and may need to evict or HiCache-transfer.'}
+ ]);
+ setWidth('occBar',(m.poolOcc||0)*100); set('occPct',fmtPct(m.poolOcc,1));
+ setWidth('actBar',(m.activePct||0)*100); set('actPct',fmtPct(m.activePct,1));
+ setWidth('evBar',(m.evictablePct||0)*100); set('evPct',fmtPct(m.evictablePct,1));
+
+ if(m.has.hostCache){
+  tile('hostTiles',[
+   {l:'Capacity',v:fmt(m.hostTotal,0),u:'tokens',cls:'idle'},
+   {l:'Used',v:fmt(m.hostUsed,0),u:'tokens',cls:((m.hostPct||0)>=0.95)?'bad':((m.hostPct||0)>=0.85)?'warn':'ok',tip:'What is it? KV tokens currently held in the host cache. Why care? When this is near 100%, the host tier is full and new GPU→host backups may stall or cause drops.'},
+   {l:'Free',v:fmt(m.hostFree,0),u:'tokens',cls:((m.hostFree||0)<10000)?'warn':'ok'}
+  ]);
+  setWidth('hostBar',(m.hostPct||0)*100); set('hostPct',fmtPct(m.hostPct,1));
+ } else {
+  document.getElementById('hostTiles').innerHTML='<div class="muted" style="grid-column:1/-1;font-size:12px;padding:6px">Host HiCache metrics not exposed by this SGLang endpoint.</div>';
+  setWidth('hostBar',0); set('hostPct','—');
+ }
+
+ set('running',fmt(m.running,0));
+ set('queued',fmt(m.queued,0));
+ set('throughput',fmt(m.genTp,1));
+ const subEl=document.getElementById('subqTiles');
+ const subItems=[
+  {l:'Bootstrap',v:fmt(m.qBootstrap,0),tip:'What is it? Prefill requests waiting for distributed-runtime bootstrap. Why care? Non-zero means prefill is stalled on multi-GPU setup.'},
+  {l:'Inflight',v:fmt(m.qInflight,0),tip:'What is it? Prefill requests currently being scheduled for execution. Why care? Spikes here indicate prefill is saturating the scheduler.'},
+  {l:'Prealloc',v:fmt(m.qPrealloc,0),tip:'What is it? Decode requests waiting to preallocate KV memory. Why care? Backlog means the cache is rejecting new decode work.'},
+  {l:'Transfer',v:fmt(m.qTransfer,0),tip:'What is it? Decode requests waiting for KV transfer between ranks. Why care? Cross-rank KV movement is a bottleneck.'},
+  {l:'Grammar',v:fmt(m.qGrammar,0),tip:'What is it? Requests waiting on structured-output grammar compilation. Why care? The JSON/grammar compiler is the bottleneck if this grows.'}
+ ].filter(x=>x.v!=='—');
+ if(subItems.length){subEl.className='tiles tiles6';tile('subqTiles',subItems);}
+ else{subEl.className='muted';subEl.style.cssText='grid-column:1/-1;font-size:12px;padding:6px';subEl.textContent='Sub-queue metrics not exposed by this endpoint.';}
+
+ set('hitWindow', m.hitWindow==null?'—':fmtPct(m.hitWindow,1));
+ set('hitWindowSub', m.hitWindow==null?'no prefill activity this window':'from prefill counter deltas');
+ set('hit',fmtPct(m.hitRate,1));
+ const tot2=(m.prefInput||0)+(m.prefDevHit||0)+(m.prefHostHit||0)+(m.prefStoreHit||0);
+ [['input',m.prefInput],['dev',m.prefDevHit],['host',m.prefHostHit],['store',m.prefStoreHit]].forEach(([x,v])=>{set(x+'Val',humanTokens(v));setWidth(x+'Bar',tot2?100*(v||0)/tot2:0)});
+
+ set('backupTok',humanTokens(m.backupTok));
+ set('backupBytes',bytes(m.backupBytes));
+ set('backupRate',fmt(m.backupRate,0));
+ set('loadbackTok',humanTokens(m.loadBackTok));
+ set('loadRate',fmt(m.loadRate,0));
+ set('drops',fmt(m.dropTok,0));
+ set('dropDetail',(m.dropTok||0)>0?`⚠ ${fmt(m.dropTok,0)} tokens destroyed since startup`:'since startup');
+
+ function paintPp(prefix,hist){
+  const el=document.getElementById(prefix+'Pp');if(!el)return;
+  if(!hist){el.innerHTML='<span class="muted" style="font-size:11px;padding:6px">Not available from this endpoint.</span>';set(prefix+'Val','—');return}
+  let stage=hist.request_process;
+  if(prefix==='tpot') stage=hist.prefill_forward||hist.chunked_prefill||hist.request_process;
+  if(prefix==='queue') stage=hist['']||Object.values(hist)[0];
+  if(!stage){el.innerHTML='<span class="muted" style="font-size:11px;padding:6px">Histogram not available.</span>';set(prefix+'Val','—');return}
+  set(prefix+'Val', fmt(stage.p95,3)+' s');
+  el.innerHTML=`<span class="pp"><span class="k">P50</span><b>${fmt(stage.p50,3)}s</b></span><span class="pp"><span class="k">P95</span><b>${fmt(stage.p95,3)}s</b></span><span class="pp"><span class="k">P99</span><b>${fmt(stage.p99,3)}s</b></span>`;
+ }
+ paintPp('ttft', m.lat);
+ paintPp('tpot', m.lat);
+ paintPp('queue', m.qt);
+ if(m.specAcceptLen||m.specAcceptRate){
+  set('specVal', `acc ${fmt(m.specAcceptRate,2)} • len ${fmt(m.specAcceptLen,2)}`);
+  set('specSub', 'acceptance rate × mean accepted length');
+ } else {set('specVal','—');set('specSub','speculative decoding inactive or not exposed')}
+
+ const mb=document.getElementById('mambaBody');
+ if(m.has.mamba){
+  mb.innerHTML=`<div class="tiles tiles3">
+    <div class="subtile idle"><div class="lbl">Used <span class="tip" data-tip="What is it? Active Mamba state slots currently needed by running requests. Why care? The Mamba equivalent of the attention KV 'Active'.">i</span></div><div class="val">${fmt(m.mambaUsed,0)}<span class="unit">slots</span></div></div>
+    <div class="subtile idle"><div class="lbl">Evictable <span class="tip" data-tip="What is it? Cached Mamba states that can be freed if space is needed. Why care? Non-zero here means recurrent state is occupying memory that could be reclaimed.">i</span></div><div class="val">${fmt(m.mambaEvict,0)}<span class="unit">slots</span></div></div>
+    <div class="subtile idle"><div class="lbl">Available <span class="tip" data-tip="What is it? Empty slots in the Mamba pool. Why care? Headroom for additional concurrent Mamba state.">i</span></div><div class="val">${fmt(m.mambaAvail,0)}<span class="unit">slots</span></div></div>
+  </div>
+  <div class="tiles tiles2" style="margin-top:10px">
+    <div class="subtile idle"><div class="lbl">Mamba → host backups <span class="tip" data-tip="What is it? Cumulative Mamba state tokens moved to host cache since startup. Why care? Shows the Mamba cache is also being tiered, not just attention KV.">i</span></div><div class="val">${humanTokens(m.backupMamba)}<span class="unit">tokens</span></div></div>
+    <div class="subtile idle"><div class="lbl">Host → Mamba load-backs <span class="tip" data-tip="What is it? Cumulative Mamba state tokens loaded back to GPU since startup. Why care? Frequency of load-backs tells you how often Mamba state is reused.">i</span></div><div class="val">${humanTokens(m.loadMamba)}<span class="unit">tokens</span></div></div>
+  </div>`;
+ } else {
+  mb.innerHTML='<div class="muted" style="padding:8px 4px">Mamba metrics not exposed by this SGLang endpoint.</div>';
+ }
+
+ const now=new Date();
+ state.hist.t.push(now.toLocaleTimeString());
+ state.hist.r.push(m.running??0);
+ state.hist.q.push(m.queued??0);
+ state.hist.tp.push(m.genTp??0);
+ state.hist.back.push(m.backupRate||0);
+ state.hist.load.push(m.loadRate||0);
+ state.hist.active.push(m.kvUsed||0);
+ state.hist.evictable.push(m.kvEvictable||0);
+ state.hist.free.push(m.kvAvail||0);
+ const keep=state.window*4;
+ if(state.hist.t.length>keep) for(const k of Object.keys(state.hist)) state.hist[k].shift();
+ refreshCharts();
+
+ const rows=[];
+ const f=state.rawFilter.toLowerCase();
+ for(const n of Object.keys(p).filter(n=>wanted.some(w=>n.includes(w))).sort()){
+  for(const x of p[n].slice(0,3)){
+   if(f && !n.toLowerCase().includes(f) && !(x.labels||'').toLowerCase().includes(f)) continue;
+   rows.push(`<tr><td>${esc(n)}</td><td>${esc(safeNaN(x.value)==null?'NaN':fmt(x.value,4))}</td><td class="muted">${esc(x.labels||'—')}</td></tr>`);
+  }
+ }
  document.getElementById('table').innerHTML=rows.length?rows.join(''):'<tr><td colspan="3" class="empty">No matching SGLang metrics found.</td></tr>';
 }
-let pollBusy=false;
-let pollSeq=0;
 
-function scheduleNext(seq){
-  if(!state.running || seq!==pollSeq) return;
-  clearTimeout(state.timer);
-  state.timer=setTimeout(poll, Number(document.getElementById('interval').value));
+function health(m){
+ const reasons=[]; let worst='ok';
+ const bump=(lvl)=>{const order={ok:0,idle:0,warn:1,bad:2}; if(order[lvl]>order[worst]) worst=lvl};
+ if((m.queued||0)>10){reasons.push(`Queue depth ${fmt(m.queued,0)}`);bump('bad')}
+ else if((m.queued||0)>2){reasons.push(`Queue depth ${fmt(m.queued,0)}`);bump('warn')}
+ if((m.poolOcc||0)>=0.95){reasons.push(`GPU KV pool ${fmtPct(m.poolOcc,1)} full`);bump('bad')}
+ else if((m.poolOcc||0)>=0.85){reasons.push(`GPU KV pool ${fmtPct(m.poolOcc,1)} full`);bump('warn')}
+ if((m.hostPct||0)>=0.95){reasons.push(`Host HiCache ${fmtPct(m.hostPct,1)} full`);bump('bad')}
+ else if((m.hostPct||0)>=0.85){reasons.push(`Host HiCache ${fmtPct(m.hostPct,1)} full`);bump('warn')}
+ if((m.dropTok||0)>0){reasons.push(`${fmt(m.dropTok,0)} host-pressure drops`);bump('bad')}
+ if((m.queued||0)>0 && (m.genTp||0)===0){reasons.push('queued but no throughput');bump('bad')}
+ if(reasons.length===0){
+  if((m.running||0)===0 && (m.queued||0)===0){reasons.push('idle'); return {overall:'IDLE',cls:'idle',reasons}}
+  reasons.push('all heuristics nominal'); return {overall:'HEALTHY',cls:'ok',reasons};
+ }
+ const overall = worst==='bad' ? 'CRITICAL' : 'WARNING';
+ return {overall, cls:worst==='bad'?'bad':'warn', reasons};
 }
 
+let pollBusy=false; let pollSeq=0;
+function scheduleNext(seq){if(!state.running||seq!==pollSeq)return;clearTimeout(state.timer);state.timer=setTimeout(poll,Number(document.getElementById('interval').value))}
 async function poll(){
-  if(!state.running || pollBusy) return;
-  const url=document.getElementById('url').value.trim();
-  if(!url) return;
-
-  pollBusy=true;
-  const seq=pollSeq;
-  const started=performance.now();
-  const timeout=new AbortController();
-  const kill=setTimeout(()=>timeout.abort(), 8000);
-
-  try{
-    // Cache-bust every request so an intermediary/proxy cannot keep returning
-    // the first Prometheus snapshot.
-    const join=url.includes('?')?'&':'?';
-    const liveUrl=url+join+'_ts='+Date.now();
-
-    const res=await fetch(liveUrl,{
-      method:'GET',
-      cache:'no-store',
-      mode:'cors',
-      credentials:'omit',
-      headers:{'Accept':'text/plain,*/*'},
-      signal:timeout.signal
-    });
-    if(!res.ok) throw new Error('HTTP '+res.status);
-
-    const text=await res.text();
-    const p=parseProm(text);
-    if(!Object.keys(p).length) throw new Error('Empty/invalid Prometheus response');
-
-    state.last=p;
-    update(p);
-
-    const latency=Math.round(performance.now()-started);
-    document.getElementById('status').textContent=`Live • ${latency}ms`;
-    document.getElementById('dot').className='dot ok';
-    document.getElementById('endpoint').textContent=url;
-    document.getElementById('updated').textContent='Updated '+new Date().toLocaleTimeString();
-  }catch(e){
-    const msg=e.name==='AbortError'
-      ? 'Timeout (>8s)'
-      : (e instanceof TypeError ? 'Fetch/CORS error' : e.message);
-    document.getElementById('status').textContent='Error: '+msg;
-    document.getElementById('dot').className='dot';
-  }finally{
-    clearTimeout(kill);
-    pollBusy=false;
-    scheduleNext(seq);
-  }
+ if(!state.running||pollBusy)return;
+ const url=document.getElementById('url').value.trim();if(!url)return;
+ pollBusy=true;const seq=pollSeq;const started=performance.now();
+ const timeout=new AbortController();const kill=setTimeout(()=>timeout.abort(),8000);
+ try{
+  const join=url.includes('?')?'&':'?';const liveUrl=url+join+'_ts='+Date.now();
+  const res=await fetch(liveUrl,{method:'GET',cache:'no-store',mode:'cors',credentials:'omit',headers:{'Accept':'text/plain,*/*'},signal:timeout.signal});
+  if(!res.ok)throw new Error('HTTP '+res.status);
+  const text=await res.text();
+  const p=parseProm(text);
+  if(!Object.keys(p).length)throw new Error('Empty/invalid Prometheus response');
+  state.last=p;
+  const m=compute(p); computeRates(m); render(m,p);
+  const latency=Math.round(performance.now()-started);
+  document.getElementById('status').textContent=`Live • ${latency}ms`;
+  document.getElementById('dot').className='dot ok';
+  document.getElementById('endpoint').textContent=url;
+  document.getElementById('updated').textContent='Updated '+new Date().toLocaleTimeString();
+ }catch(e){
+  const msg=e.name==='AbortError'?'Timeout (>8s)':(e instanceof TypeError?'Fetch/CORS error':e.message);
+  document.getElementById('status').textContent='Error: '+msg;
+  document.getElementById('dot').className='dot';
+ }finally{clearTimeout(kill);pollBusy=false;scheduleNext(seq)}
 }
-
 function connect(){
-  state.running=true;
-  pollSeq++;
-  clearTimeout(state.timer);
-  state.hist={t:[],r:[],q:[],kv:[],tp:[],back:[],load:[]};
-  state.prevCounters=null;
-  document.getElementById('pause').textContent='Pause';
-  document.getElementById('dot').className='dot warn';
-  document.getElementById('status').textContent='Connecting…';
-  initCharts();
-  poll();
+ state.running=true;pollSeq++;clearTimeout(state.timer);
+ state.hist={t:[],r:[],q:[],tp:[],back:[],load:[],active:[],evictable:[],free:[]};
+ state.prevCounters=null;
+ document.getElementById('pause').textContent='Pause';
+ document.getElementById('dot').className='dot warn';
+ document.getElementById('status').textContent='Connecting…';
+ initCharts();poll();
 }
-
 function togglePause(){
-  state.running=!state.running;
-  pollSeq++;
-  clearTimeout(state.timer);
-  document.getElementById('pause').textContent=state.running?'Pause':'Resume';
-  document.getElementById('dot').className=state.running?'dot ok':'dot warn';
-  document.getElementById('status').textContent=state.running?'Connecting…':'Paused';
-  if(state.running) poll();
+ state.running=!state.running;pollSeq++;clearTimeout(state.timer);
+ document.getElementById('pause').textContent=state.running?'Pause':'Resume';
+ document.getElementById('dot').className=state.running?'dot ok':'dot warn';
+ document.getElementById('status').textContent=state.running?'Connecting…':'Paused';
+ if(state.running)poll();
 }
-
-document.getElementById('interval').addEventListener('change',()=>{
-  if(state.running){
-    pollSeq++;
-    clearTimeout(state.timer);
-    poll();
-  }
-});
+document.getElementById('interval').addEventListener('change',()=>{if(state.running){pollSeq++;clearTimeout(state.timer);poll()}});
+document.getElementById('rawSearch').addEventListener('input',(e)=>{state.rawFilter=e.target.value;if(state.last){const m=compute(state.last);computeRates(m);render(m,state.last)}});
+document.querySelectorAll('#windowSel button').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('#windowSel button').forEach(x=>x.classList.remove('on'));b.classList.add('on');state.window=Number(b.dataset.w);if(state.last){const m=compute(state.last);computeRates(m);render(m,state.last)}}));
 initCharts();
 </script>
 </body>
