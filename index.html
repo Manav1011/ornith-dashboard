@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Ornith SGLang • Live Metrics</title>
+<title>SGLang Live Metrics</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
 <style>
 :root{--bg:#090909;--panel:#111;--panel2:#151515;--line:#292929;--text:#f5f5f5;--muted:#9a9a9a;--orange:#ff7a00;--orange2:#ff9d3d;--green:#31d17c;--red:#ff4d4d;--yellow:#f5c542;--blue:#5aa6ff;--purple:#b48cff;--shadow:0 10px 35px #0008}
@@ -21,7 +21,7 @@ main{max-width:1700px;margin:auto;padding:24px}.hero{display:flex;justify-conten
 /* status pill */
 .status-pill{display:inline-flex;align-items:center;gap:7px;padding:6px 12px;border-radius:999px;font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;border:1px solid #333;background:#1a1a1a}.status-pill .d{width:8px;height:8px;border-radius:50%}.status-pill.ok{color:var(--green);border-color:#1f4a30;background:#0f1f17}.status-pill.ok .d{background:var(--green);box-shadow:0 0 10px #31d17c}.status-pill.warn{color:var(--yellow);border-color:#4a3f1a;background:#1f1a0c}.status-pill.warn .d{background:var(--yellow)}.status-pill.bad{color:var(--red);border-color:#4a1d1d;background:#1f0c0c}.status-pill.bad .d{background:var(--red);box-shadow:0 0 10px #ff4d4d}.status-pill.idle{color:var(--muted);border-color:#333;background:#161616}.status-pill.idle .d{background:#777}
 /* tiles row */
-.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}.tiles3{grid-template-columns:repeat(3,1fr)}.tiles2{grid-template-columns:repeat(2,1fr)}.tiles6{grid-template-columns:repeat(6,1fr)}.subtile{background:#161616;border:1px solid #232323;border-radius:10px;padding:11px 12px}.subtile .lbl{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);display:flex;align-items:center;gap:5px}.subtile .val{font-size:20px;font-weight:800;margin-top:4px;line-height:1.15}.subtile .unit{font-size:11px;color:var(--muted);font-weight:600;margin-left:3px}.subtile.ok .val{color:var(--green)}.subtile.warn .val{color:var(--yellow)}.subtile.bad .val{color:var(--red)}.subtile.idle .val{color:var(--muted)}
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}.tiles3{grid-template-columns:repeat(3,1fr)}.tiles2{grid-template-columns:repeat(2,1fr)}.tiles5{grid-template-columns:repeat(5,1fr)}.tiles6{grid-template-columns:repeat(6,1fr)}.subtile{background:#161616;border:1px solid #232323;border-radius:10px;padding:11px 12px}.subtile .lbl{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);display:flex;align-items:center;gap:5px}.subtile .val{font-size:20px;font-weight:800;margin-top:4px;line-height:1.15}.subtile .unit{font-size:11px;color:var(--muted);font-weight:600;margin-left:3px}.subtile.ok .val{color:var(--green)}.subtile.warn .val{color:var(--yellow)}.subtile.bad .val{color:var(--red)}.subtile.idle .val{color:var(--muted)}
 /* stacked bar */
 .stackbar{height:14px;border-radius:99px;overflow:hidden;background:#1a1a1a;display:flex;border:1px solid #252525}.stackbar .seg{height:100%;transition:width .3s ease}.seg-weight{background:linear-gradient(90deg,#6e3aa8,#b48cff)}.seg-kv{background:linear-gradient(90deg,#1f6fc4,#5aa6ff)}.seg-graph{background:linear-gradient(90deg,#1f9d5c,#31d17c)}.seg-free{background:#1f1f1f}.stacklegend{display:flex;flex-wrap:wrap;gap:14px;margin-top:10px;font-size:12px;color:#bbb}.stacklegend span{display:flex;align-items:center;gap:6px}.stacklegend i{width:10px;height:10px;border-radius:3px;display:inline-block}
 /* percent rows */
@@ -38,13 +38,13 @@ details.adv{border:1px solid var(--line);border-radius:14px;background:linear-gr
 .kpi{padding:14px 16px}
 /* dropdown used for window */
 .segsel{display:inline-flex;background:#161616;border:1px solid #2a2a2a;border-radius:9px;overflow:hidden}.segsel button{background:transparent;border:0;color:var(--muted);padding:6px 10px;font-size:11px;font-weight:700;letter-spacing:.05em}.segsel button.on{background:#2a1a08;color:var(--orange)}
-@media(max-width:1200px){.grid{grid-template-columns:repeat(2,1fr)}.grid.two{grid-template-columns:1fr}.grid.three{grid-template-columns:1fr}.grid.four-kpi{grid-template-columns:repeat(2,1fr)}.charts{grid-template-columns:1fr}.tiles,.tiles3,.tiles2,.tiles6{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:1200px){.grid{grid-template-columns:repeat(2,1fr)}.grid.two{grid-template-columns:1fr}.grid.three{grid-template-columns:1fr}.grid.four-kpi{grid-template-columns:repeat(2,1fr)}.charts{grid-template-columns:1fr}.tiles,.tiles3,.tiles2,.tiles5,.tiles6{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:700px){.top{align-items:flex-start;flex-direction:column}.controls{justify-content:flex-start}.input{min-width:0;width:100%}.grid{grid-template-columns:1fr}.wide{grid-column:span 1}.tiles,.tiles3,.tiles2,.tiles6{grid-template-columns:1fr 1fr}main{padding:15px}}
 </style>
 </head>
 <body>
 <header><div class="top">
-  <div class="brand"><div class="logo">O</div><div><h1>ORNITH • SGLANG OBSERVABILITY</h1><span>Live inference, KV cache & HiCache telemetry</span></div></div>
+  <div class="brand"><div><h1>SGLANG OBSERVABILITY</h1><span>Live inference, KV cache & HiCache telemetry</span></div></div>
   <div class="controls">
     <input id="url" class="input" value="https://vllm.webelight.co.in/metrics" placeholder="Prometheus metrics URL">
     <select id="interval"><option value="1000">1s</option><option value="2000" selected>2s</option><option value="5000">5s</option><option value="10000">10s</option></select>
@@ -67,10 +67,17 @@ details.adv{border:1px solid var(--line);border-radius:14px;background:linear-gr
   </div>
 </div>
 
-<!-- 1. System Health -->
-<div class="card" style="margin-bottom:14px" id="healthCard">
-  <div class="label" data-tip="Overall status derived from request load, queueing, cache pressure, and host-pressure drops. Thresholds are dashboard heuristics, not SGLang's own alerts.">System Health<span class="tip">i</span></div>
-  <div class="healthrow" id="healthTiles"></div>
+<!-- 5. GPU Memory breakdown -->
+<div class="section">GPU Memory <span class="muted" style="font-weight:500;text-transform:none;letter-spacing:0">— how GPU memory is split between weights, KV cache, CUDA graphs, and free space</span></div>
+<div class="card" id="gpuMemCard" style="margin-bottom:14px">
+  <div class="stackbar" id="stackbar"><div class="seg seg-weight" id="segW"></div><div class="seg seg-kv" id="segK"></div><div class="seg seg-graph" id="segG"></div><div class="seg seg-free" id="segF"></div></div>
+  <div class="stacklegend">
+    <span><i style="background:#b48cff"></i>Weights <b id="memW">—</b></span>
+    <span><i style="background:#5aa6ff"></i>KV Cache <b id="memK">—</b></span>
+    <span><i style="background:#31d17c"></i>CUDA Graph <b id="memG">—</b></span>
+    <span><i style="background:#1f1f1f;border:1px solid #333"></i>Available <b id="memF">—</b></span>
+  </div>
+  <div class="muted" id="memWarn" style="margin-top:10px;font-size:11px"></div>
 </div>
 
 <!-- 2. At-a-glance "Now" strip + 3. Live charts -->
@@ -80,11 +87,6 @@ details.adv{border:1px solid var(--line);border-radius:14px;background:linear-gr
   <div class="card kpi"><div class="label" data-tip="Output tokens per second the server is producing right now. 0 when idle.">Throughput <span class="tip">i</span></div><div class="value" id="throughput">—</div><div class="sub">tokens / second</div></div>
   <div class="card kpi"><div class="label" data-tip="Time-to-first-token. How long a user waits before the first generated token appears.">TTFT <span class="tip">i</span></div><div class="value sm" id="ttftVal">—</div><div class="pprow" id="ttftPp"></div></div>
 </div>
-<div class="charts" style="margin-top:14px">
-  <div class="card"><div class="label">Running vs Queued <span class="muted" style="font-weight:500;text-transform:none;letter-spacing:0">• last window</span></div><div class="chartbox"><canvas id="reqChart"></canvas></div></div>
-  <div class="card"><div class="label">Throughput <span class="muted" style="font-weight:500;text-transform:none;letter-spacing:0">• last window</span></div><div class="chartbox"><canvas id="tpChart"></canvas></div></div>
-</div>
-
 <!-- 4. GPU KV Cache (the central question) -->
 <div class="section">GPU KV Cache <span class="muted" style="font-weight:500;text-transform:none;letter-spacing:0">— ACTIVE (in use) · EVICTABLE (cached) · FREE (empty)</span></div>
 <div class="card">
@@ -96,17 +98,10 @@ details.adv{border:1px solid var(--line);border-radius:14px;background:linear-gr
   </div>
 </div>
 
-<!-- 5. GPU Memory breakdown -->
-<div class="section">GPU Memory <span class="muted" style="font-weight:500;text-transform:none;letter-spacing:0">— how GPU memory is split between weights, KV cache, CUDA graphs, and free space</span></div>
-<div class="card" id="gpuMemCard">
-  <div class="stackbar" id="stackbar"><div class="seg seg-weight" id="segW"></div><div class="seg seg-kv" id="segK"></div><div class="seg seg-graph" id="segG"></div><div class="seg seg-free" id="segF"></div></div>
-  <div class="stacklegend">
-    <span><i style="background:#b48cff"></i>Weights <b id="memW">—</b></span>
-    <span><i style="background:#5aa6ff"></i>KV Cache <b id="memK">—</b></span>
-    <span><i style="background:#31d17c"></i>CUDA Graph <b id="memG">—</b></span>
-    <span><i style="background:#1f1f1f;border:1px solid #333"></i>Available <b id="memF">—</b></span>
-  </div>
-  <div class="muted" id="memWarn" style="margin-top:10px;font-size:11px"></div>
+<!-- 3. Live charts -->
+<div class="charts" style="margin-top:14px">
+  <div class="card"><div class="label">Throughput <span class="muted" style="font-weight:500;text-transform:none;letter-spacing:0">• last window</span></div><div class="chartbox"><canvas id="tpChart"></canvas></div></div>
+  <div class="card"><div class="label">Running vs Queued <span class="muted" style="font-weight:500;text-transform:none;letter-spacing:0">• last window</span></div><div class="chartbox"><canvas id="reqChart"></canvas></div></div>
 </div>
 
 <!-- 6. Host HiCache + 7. HiCache Transfers (the off-GPU tier) -->
@@ -132,6 +127,24 @@ details.adv{border:1px solid var(--line);border-radius:14px;background:linear-gr
 <div class="charts" style="margin-top:14px">
   <div class="card"><div class="label">Transfer rates <span class="muted" style="font-weight:500;text-transform:none;letter-spacing:0">• tokens / second</span></div><div class="chartbox"><canvas id="hcChart"></canvas></div></div>
   <div class="card"><div class="label">KV pool breakdown <span class="muted" style="font-weight:500;text-transform:none;letter-spacing:0">• active vs evictable vs free</span></div><div class="chartbox"><canvas id="kvChart"></canvas></div></div>
+</div>
+
+<!-- 7b. L3 Storage / NIXL (external storage tier) -->
+<div class="section">L3 STORAGE / NIXL <span class="muted" style="font-weight:500;text-transform:none;letter-spacing:0">— KV cache activity in the external storage tier</span></div>
+<div class="card" id="l3Card">
+  <div class="tiles tiles5" id="l3Tiles" style="margin-top:0"></div>
+  <div class="muted" style="margin-top:14px;font-size:11px">L3 occupancy and capacity are not exposed by the current SGLang metrics endpoint. The metrics shown here represent NIXL cache activity — <b>not</b> current L3 storage usage.</div>
+</div>
+<div class="charts" style="margin-top:14px">
+  <div class="card" id="l3ChartCard" style="grid-column:1/-1">
+    <div class="label">L3 STORAGE ACTIVITY <span class="muted" style="font-weight:500;text-transform:none;letter-spacing:0">• tokens/sec over the selected window</span></div>
+    <div class="chartbox" id="l3ChartBox"><canvas id="l3Chart"></canvas></div>
+    <div class="muted" id="l3ChartMsg" style="display:none;padding:24px;text-align:center;font-size:12px">No L3 activity metrics exposed by this endpoint.</div>
+  </div>
+</div>
+<div class="card" style="margin-top:14px">
+  <div class="label" data-tip="Any other metrics the endpoint exposes that carry a storage_backend label — e.g. NIXL latency, error/drop counters, or load-back counters. Only real, exposed metrics are listed here; nothing is inferred or assumed.">L3 NIXL · additional exposed metrics<span class="tip">i</span></div>
+  <div id="l3Extra" class="muted" style="font-size:12px;margin-top:8px">No additional NIXL metrics detected by this endpoint.</div>
 </div>
 
 <!-- 8. Cache Effectiveness -->
@@ -177,14 +190,14 @@ details.adv{border:1px solid var(--line);border-radius:14px;background:linear-gr
   <div class="tablewrap"><table class="table"><thead><tr><th>Metric</th><th>Value</th><th>Labels</th></tr></thead><tbody id="table"><tr><td colspan="3" class="empty">Connect to a metrics endpoint.</td></tr></tbody></table></div>
 </div></details>
 
-<div class="footer">Ornith SGLang Live Dashboard • Polls the configured Prometheus exposition endpoint directly • Status thresholds are dashboard heuristics, not SGLang's own alerts.</div>
+<div class="footer">SGLang Live Dashboard • Polls the configured Prometheus exposition endpoint directly • Status thresholds are dashboard heuristics, not SGLang's own alerts.</div>
 </main>
 
 <script>
 const state={running:true,timer:null,last:null,
-  hist:{t:[],r:[],q:[],tp:[],back:[],load:[],active:[],evictable:[],free:[]},
-  prevCounters:null,rawFilter:'',window:60};
-const wanted=['num_running_reqs','num_queue_reqs','token_usage','max_total_num_tokens','gen_throughput','cache_hit_rate','kv_cache_memory_usage_gb','kv_used_tokens','kv_evictable_tokens','kv_available_tokens','hicache_host_used_tokens','hicache_host_total_tokens','hicache_backup_tokens_total','hicache_backup_bytes_total','load_back_tokens_total','hicache_dropped_tokens_total','prefill_effective_tokens_total','cached_tokens_total','weight_memory_usage_gb','graph_memory_usage_gb','startup_available_gpu_memory_gb','mamba_used_tokens','mamba_available_tokens','mamba_evictable_tokens','mamba_usage','spec_accept_length','spec_accept_rate','per_stage_req_latency_seconds','queue_time_seconds','evicted_tokens_total','prompt_tokens_total','generation_tokens_total','num_prefill_bootstrap_queue_reqs','num_prefill_inflight_queue_reqs','num_decode_prealloc_queue_reqs','num_decode_transfer_queue_reqs','num_grammar_queue_reqs'];
+  hist:{t:[],r:[],q:[],tp:[],back:[],load:[],active:[],evictable:[],free:[],l3back:[],l3hit:[]},
+  prevCounters:null,rawFilter:'',window:60,l3Sig:''};
+const wanted=['num_running_reqs','num_queue_reqs','token_usage','max_total_num_tokens','gen_throughput','cache_hit_rate','kv_cache_memory_usage_gb','kv_used_tokens','kv_evictable_tokens','kv_available_tokens','hicache_host_used_tokens','hicache_host_total_tokens','hicache_backup_tokens_total','hicache_backup_bytes_total','load_back_tokens_total','hicache_dropped_tokens_total','backuped_tokens_total','prefill_effective_tokens_total','cached_tokens_total','weight_memory_usage_gb','graph_memory_usage_gb','startup_available_gpu_memory_gb','mamba_used_tokens','mamba_available_tokens','mamba_evictable_tokens','mamba_usage','spec_accept_length','spec_accept_rate','per_stage_req_latency_seconds','queue_time_seconds','evicted_tokens_total','prompt_tokens_total','generation_tokens_total','num_prefill_bootstrap_queue_reqs','num_prefill_inflight_queue_reqs','num_decode_prealloc_queue_reqs','num_decode_transfer_queue_reqs','num_grammar_queue_reqs'];
 const colors={grid:'#3a3a3a',text:'#e8e8e8',axis:'#cfcfcf',palette:['#ff7a00','#5aa6ff','#31d17c','#b48cff','#f5c542','#ff4d4d']};
 function esc(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
 function safeNaN(n){return (n==null||Number.isNaN(n))?null:n}
@@ -205,6 +218,10 @@ function pick(p,short){const n=findName(p,short);if(!n||!p[n])return null;return
 function pickSum(p,short){const n=findName(p,short);if(!n||!p[n])return null;let t=0,any=false;for(const x of p[n]){const v=safeNaN(x.value);if(v!=null){t+=v;any=true}}return any?t:null}
 function set(id,v){const el=document.getElementById(id);if(el)el.textContent=v}
 function setWidth(id,v){const el=document.getElementById(id);if(el)el.style.width=Math.max(0,Math.min(100,v||0))+'%'}
+// Detect which external storage backend(s) the endpoint references, from any storage_backend label.
+function detectL3Backend(p){const s=new Set();for(const n of Object.keys(p)){for(const x of p[n]){const mm=(x.labels||'').match(/storage_backend="([^"]+)"/);if(mm)s.add(mm[1])}}return s.size?[...s]:null}
+// Any other exposed metrics carrying a storage_backend label (latency, errors, load-back, ...). Never inferred.
+function detectL3Extra(p){const out=[];for(const n of Object.keys(p)){if(n.includes('backuped_tokens_total')||n.includes('prefill_effective_tokens_total'))continue;for(const x of p[n]){if((x.labels||'').includes('storage_backend='))out.push({name:n,value:x.value,labels:x.labels||''})}}return out}
 
 function parseHistogram(p,short){
  const n=findName(p,short); if(!n||!p[n]) return null;
@@ -270,6 +287,9 @@ function compute(p){
  m.mambaUsed=pick(p,'mamba_used_tokens');
  m.mambaAvail=pick(p,'mamba_available_tokens');
  m.mambaEvict=pick(p,'mamba_evictable_tokens');
+ m.l3Backend=detectL3Backend(p);
+ m.l3BackupTok=pickSum(p,'backuped_tokens_total');
+ m.l3Extra=detectL3Extra(p);
  m.has={kvPool:m.kvCap!=null,hostCache:m.hostTotal!=null,mamba:m.mambaUsed!=null||m.mambaAvail!=null,histogram:!!m.lat,transfer:m.backupTok!=null||m.loadBackTok!=null};
  return m;
 }
@@ -288,8 +308,12 @@ function computeRates(m){
    const dStore=Math.max(0,(m.prefStoreHit??0)-(prev.pStore??0));
    const hits=dDev+dHost+dStore; const tot=hits+dIn;
    m.hitWindow= tot>0 ? hits/tot : null;
- } else {m.backupRate=m.loadRate=m.evictRate=m.dropRate=0; m.hitWindow=null}
- state.prevCounters={t:now,bk:m.backupTok??0,lb:m.loadBackTok??0,ev:m.evictTok??0,dr:m.dropTok??0,pIn:m.prefInput??0,pDev:m.prefDevHit??0,pHost:m.prefHostHit??0,pStore:m.prefStoreHit??0};
+   m.l3BackupRate=safeNaN(m.l3BackupTok)!=null?d(m.l3BackupTok,prev.l3bk):null;
+   m.l3HitRate=safeNaN(m.prefStoreHit)!=null?dStore/dt:null;
+   m.l3HitPct=tot>0?dStore/tot:null;
+ } else {m.backupRate=m.loadRate=m.evictRate=m.dropRate=0; m.hitWindow=null;
+   m.l3BackupRate=safeNaN(m.l3BackupTok)!=null?0:null; m.l3HitRate=safeNaN(m.prefStoreHit)!=null?0:null; m.l3HitPct=null}
+ state.prevCounters={t:now,bk:m.backupTok??0,lb:m.loadBackTok??0,ev:m.evictTok??0,dr:m.dropTok??0,pIn:m.prefInput??0,pDev:m.prefDevHit??0,pHost:m.prefHostHit??0,pStore:m.prefStoreHit??0,l3bk:m.l3BackupTok??0};
 }
 
 function mkChart(canvasId,datasets,units){
@@ -309,6 +333,17 @@ function refreshCharts(){
  if(!charts.req)return;
  for(const c of Object.values(charts)){c.data.labels=state.hist.t;c.update('none')}
 }
+// Build the L3 activity chart with ONLY the series the endpoint actually exposes (avoids plotting a fake 0 line).
+function buildL3Chart(){
+ if(charts.l3){charts.l3.destroy();delete charts.l3;}
+ const sig=state.l3Sig.split('-');
+ const datasets=[];
+ if(sig[0]==='1')datasets.push({label:'L3 backup rate',data:state.hist.l3back,color:colors.palette[0]});
+ if(sig[1]==='1')datasets.push({label:'Storage-hit rate',data:state.hist.l3hit,color:colors.palette[4]});
+ const box=document.getElementById('l3ChartBox'),msg=document.getElementById('l3ChartMsg');
+ if(datasets.length){charts.l3=mkChart('l3Chart',datasets,'tok/s');if(box)box.style.display='';if(msg)msg.style.display='none';}
+ else{if(box)box.style.display='none';if(msg)msg.style.display='';}
+}
 
 function tile(parentId,items){
  const el=document.getElementById(parentId);if(!el)return;
@@ -316,10 +351,13 @@ function tile(parentId,items){
 }
 
 function render(m,p){
- const h=health(m);
- document.getElementById('healthTiles').innerHTML=
+ const ht=document.getElementById('healthTiles');
+ if(ht){
+  const h=health(m);
+  ht.innerHTML=
    `<span class="status-pill ${h.cls}"><span class="d"></span>${h.overall}</span>`+
    h.reasons.map(r=>`<span class="muted" style="font-size:12px">• ${esc(r)}</span>`).join('');
+ }
 
  const known=[m.weightGB,m.kvGB,m.graphGB].filter(v=>v!=null).reduce((a,b)=>a+b,0);
  const avail=m.startupAvailGB ?? 0;
@@ -418,6 +456,25 @@ function render(m,p){
   mb.innerHTML='<div class="muted" style="padding:8px 4px">Mamba metrics not exposed by this SGLang endpoint.</div>';
  }
 
+ // L3 / NIXL — activity only; occupancy is not exposed, so never rendered.
+ const bk=m.l3Backend;
+ tile('l3Tiles',[
+  {l:'Storage backend',v:bk?bk.map(s=>s.toUpperCase()).join(' · '):'Not detected',s:bk?'L3 tier in use':'no storage_backend metric',cls:bk?'ok':'idle',tip:'What is this? The backend used for the L3 storage tier. Why care? It tells you whether an external storage tier such as NIXL is actually in use.'},
+  {l:'Tokens backed up',v:m.l3BackupTok!=null?humanTokens(m.l3BackupTok):'Unavailable',s:m.l3BackupTok!=null?'cumulative, since startup':'',cls:(m.l3BackupTok!=null&&m.l3BackupTok>0)?'ok':'idle',tip:'What is this? Cumulative KV-cache tokens backed up from the host tier to L3/NIXL — a counter since startup. Why care? Shows how much cache data has flowed into L3. Important: a running total, NOT current L3 occupancy.'},
+  {l:'L3 backup rate',v:m.l3BackupRate!=null?fmt(m.l3BackupRate,0):'Unavailable',u:m.l3BackupRate!=null?'tokens/sec':'',s:'live rate',tip:'What is this? Live rate of KV tokens being written to L3/NIXL. Why care? A high rate means the system is actively pushing cache into external storage.'},
+  {l:'Storage hits',v:m.l3HitRate!=null?fmt(m.l3HitRate,0):'Unavailable',u:m.l3HitRate!=null?'tokens/sec':'',s:'current window',tip:'What is this? Rate of prompt tokens served from the L3 storage cache instead of being recomputed. Why care? Shows whether L3 is actually helping requests avoid recomputation.'},
+  {l:'L3 hit rate',v:m.l3HitPct!=null?fmtPct(m.l3HitPct,1):'—',s:m.l3HitPct==null?(m.prefStoreHit!=null?'no prefill activity this window':'SGLang does not expose this'):'from windowed rates',tip:'What is this? Share of prefill tokens in the selected window served from L3, computed from windowed counter rates. Why care? Isolates the L3 contribution to cache effectiveness (not the coarse cache_hit_rate gauge).'}
+ ]);
+ const extraEl=document.getElementById('l3Extra');
+ if(extraEl){
+   if(m.l3Extra&&m.l3Extra.length){
+     extraEl.className='';
+     extraEl.innerHTML=m.l3Extra.slice(0,12).map(e=>`<div style="display:flex;justify-content:space-between;gap:10px;padding:6px 0;border-bottom:1px solid #232323"><span>${esc(e.name)} <span class="muted">${esc(e.labels)}</span></span><b>${esc(fmt(e.value,2))}</b></div>`).join('');
+   } else {extraEl.className='muted';extraEl.textContent='No additional NIXL metrics detected by this endpoint.';}
+ }
+ const l3Sig=(m.l3BackupTok!=null?'1':'0')+'-'+(m.prefStoreHit!=null?'1':'0');
+ if(state.l3Sig!==l3Sig||!charts.l3){state.l3Sig=l3Sig;buildL3Chart();}
+
  const now=new Date();
  state.hist.t.push(now.toLocaleTimeString());
  state.hist.r.push(m.running??0);
@@ -428,6 +485,8 @@ function render(m,p){
  state.hist.active.push(m.kvUsed||0);
  state.hist.evictable.push(m.kvEvictable||0);
  state.hist.free.push(m.kvAvail||0);
+ state.hist.l3back.push(m.l3BackupRate||0);
+ state.hist.l3hit.push(m.l3HitRate||0);
  const keep=state.window*4;
  if(state.hist.t.length>keep) for(const k of Object.keys(state.hist)) state.hist[k].shift();
  refreshCharts();
@@ -491,8 +550,9 @@ async function poll(){
 }
 function connect(){
  state.running=true;pollSeq++;clearTimeout(state.timer);
- state.hist={t:[],r:[],q:[],tp:[],back:[],load:[],active:[],evictable:[],free:[]};
+ state.hist={t:[],r:[],q:[],tp:[],back:[],load:[],active:[],evictable:[],free:[],l3back:[],l3hit:[]};
  state.prevCounters=null;
+ state.l3Sig='';
  document.getElementById('pause').textContent='Pause';
  document.getElementById('dot').className='dot warn';
  document.getElementById('status').textContent='Connecting…';
