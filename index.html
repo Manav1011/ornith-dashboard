@@ -13,7 +13,7 @@ header{position:sticky;top:0;z-index:5;background:#0b0b0bec;border-bottom:1px so
 .controls{display:flex;gap:9px;flex-wrap:wrap;justify-content:flex-end;align-items:center}.input{background:#111;border:1px solid #333;color:white;border-radius:9px;padding:10px 12px;min-width:330px;outline:none}.input:focus{border-color:var(--orange)}button,select{background:#191919;color:#eee;border:1px solid #343434;border-radius:9px;padding:10px 13px;cursor:pointer}button:hover{border-color:var(--orange);color:#fff}.primary{background:var(--orange);color:#090909;border-color:var(--orange);font-weight:800}.primary:hover{background:var(--orange2);color:#090909}.status{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:7px}.conn{display:contents}.dot{width:8px;height:8px;border-radius:50%;background:var(--red)}.dot.ok{background:var(--green);box-shadow:0 0 10px #31d17c}.dot.warn{background:var(--yellow)}
 main{max-width:1700px;margin:auto;padding:24px}.hero{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:20px;flex-wrap:wrap;gap:14px}.hero h2{font-size:28px;margin:0 0 5px}.hero p{margin:0;color:var(--muted);font-size:13px}.hero-tools{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
 .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:14px}.grid.two{grid-template-columns:1fr 2fr;align-items:stretch}.grid.three{grid-template-columns:repeat(3,1fr)}.card{background:linear-gradient(180deg,#151515,#101010);border:1px solid var(--line);border-radius:14px;padding:17px;box-shadow:var(--shadow);position:relative}.card .label{font-size:11px;text-transform:uppercase;letter-spacing:.09em;color:var(--muted);display:flex;align-items:center;gap:6px}.value{font-size:28px;font-weight:800;margin-top:8px}.value.sm{font-size:18px}.sub{font-size:12px;color:var(--muted);margin-top:5px}.accent{color:var(--orange2)}.wide{grid-column:span 2}.charts{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.chartbox{height:260px}.chartbox.tall{height:320px}.section{margin:26px 0 11px;font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#ddd;display:flex;align-items:center;gap:10px}
-.bars{display:grid;gap:12px;margin-top:16px}.barrow{display:grid;grid-template-columns:160px 1fr 90px;align-items:center;gap:12px;font-size:12px}.track{height:9px;background:#252525;border-radius:99px;overflow:hidden}.fill{height:100%;background:linear-gradient(90deg,#ff4f00,var(--orange2));border-radius:99px;width:0}.fill.green{background:linear-gradient(90deg,#1f9d5c,var(--green))}.fill.yellow{background:linear-gradient(90deg,#c7941f,var(--yellow))}.fill.red{background:linear-gradient(90deg,#b03030,var(--red))}.fill.blue{background:linear-gradient(90deg,#2e6fc4,var(--blue))}.fill.purple{background:linear-gradient(90deg,#7849c4,var(--purple))}
+.bars{display:grid;gap:12px;margin-top:16px}.barrow{display:grid;grid-template-columns:160px 1fr 90px;align-items:center;gap:12px;font-size:12px;min-width:0;overflow-wrap:anywhere}.barrow>*{min-width:0}.track{height:9px;background:#252525;border-radius:99px;overflow:hidden}.fill{height:100%;background:linear-gradient(90deg,#ff4f00,var(--orange2));border-radius:99px;width:0}.fill.green{background:linear-gradient(90deg,#1f9d5c,var(--green))}.fill.yellow{background:linear-gradient(90deg,#c7941f,var(--yellow))}.fill.red{background:linear-gradient(90deg,#b03030,var(--red))}.fill.blue{background:linear-gradient(90deg,#2e6fc4,var(--blue))}.fill.purple{background:linear-gradient(90deg,#7849c4,var(--purple))}
 .tablewrap{overflow:auto}.table{width:100%;border-collapse:collapse;font-size:12px}.table th,.table td{padding:12px 14px;border-bottom:1px solid #2a2a2a;text-align:left;white-space:nowrap}.table th{color:#cfcfcf;font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.05em;background:#181818;position:sticky;top:0}.table tr:hover td{background:#141414}.pill{padding:4px 8px;border-radius:999px;background:#1e1e1e}.good{color:var(--green)}.bad{color:var(--red)}.muted{color:var(--muted)}.empty{color:var(--muted);padding:30px;text-align:center}.footer{padding:25px 0 10px;color:#666;font-size:11px;text-align:center}
 /* tip + tooltip */
 .tip{display:inline-grid;place-items:center;width:14px;height:14px;border-radius:50%;background:#2a2a2a;color:#aaa;font-size:10px;cursor:help;user-select:none;font-weight:700;line-height:1}.tip:hover{background:var(--orange);color:#000}
@@ -34,7 +34,7 @@ details.adv{border:1px solid var(--line);border-radius:14px;background:linear-gr
 /* hero status row */
 .healthrow{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:6px}
 /* KPI strip (4 at-a-glance tiles) */
-.grid.four-kpi{grid-template-columns:repeat(4,1fr);margin-bottom:14px}
+.grid.four-kpi{grid-template-columns:repeat(5,1fr);margin-bottom:14px}
 .kpi{padding:14px 16px}
 /* dropdown used for window */
 .segsel{display:inline-flex;background:#161616;border:1px solid #2a2a2a;border-radius:9px;overflow:hidden}.segsel button{background:transparent;border:0;color:var(--muted);padding:6px 10px;font-size:11px;font-weight:700;letter-spacing:.05em}.segsel button.on{background:#2a1a08;color:var(--orange)}
@@ -43,14 +43,22 @@ details.adv{border:1px solid var(--line);border-radius:14px;background:linear-gr
 .top{align-items:center;gap:8px;padding:10px 14px}.brand{flex:1 1 auto;min-width:0}.brand h1+span{display:none}.statusline{cursor:pointer}.navtoggle{display:block;font-size:15px;line-height:1;padding:9px 13px}.controls{position:absolute;top:calc(100% + 6px);left:12px;right:12px;flex-direction:column;align-items:stretch;gap:8px;background:#141414;border:1px solid #2a2a2a;border-radius:12px;padding:12px;box-shadow:var(--shadow);z-index:6}.controls.closed{display:none}.conn{display:flex;flex-wrap:wrap;align-items:center;gap:7px}.input{flex:1 1 220px;min-width:0;padding:9px 10px}.controls select,.controls button{flex:1 1 auto;min-width:0;padding:9px 10px}.brand h1{font-size:14px}.logo{width:32px;height:32px}
 main{padding:15px 12px}.hero{margin-bottom:14px}.hero h2{font-size:21px}.hero p{font-size:12px}.section{margin:18px 0 8px;font-size:12px}
 .card{padding:13px 12px;border-radius:12px}.value{font-size:24px}.subtile .val{font-size:17px}
-.grid{grid-template-columns:1fr}.grid.four-kpi{grid-template-columns:repeat(2,1fr);gap:10px}.wide{grid-column:span 1}
-.tiles,.tiles3,.tiles2,.tiles6{grid-template-columns:1fr 1fr;gap:8px}.tiles5{grid-template-columns:1fr 1fr;gap:8px}
+.grid{grid-template-columns:repeat(2,1fr)!important;gap:8px}.grid.two{grid-template-columns:1fr!important}.grid.four-kpi{grid-template-columns:repeat(2,1fr)!important;gap:10px}.wide{grid-column:1/-1!important}
+.tiles,.tiles3,.tiles2,.tiles5,.tiles6{grid-template-columns:1fr 1fr!important;gap:8px!important}
 .hgrid{grid-template-columns:1fr 1fr!important}
-.barrow{grid-template-columns:96px 1fr 64px;gap:8px;font-size:11px}.prow{grid-template-columns:96px 1fr 58px;gap:8px;font-size:11px}
+.barrow,.prow{grid-template-columns:96px 1fr 64px;gap:8px;font-size:11px;min-width:0}
+.barrow>*,.prow>*{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.stacklegend span{min-width:0;overflow-wrap:anywhere}
 .charts{gap:10px}.chartbox{height:210px}.chartbox.tall{height:240px}
 .status-pill{font-size:11px;padding:5px 10px}
 .table th,.table td{padding:9px 10px}
-@media(max-width:420px){.grid.four-kpi{grid-template-columns:1fr 1fr}.hero-tools{width:100%;justify-content:space-between}.input{font-size:13px}}
+}
+@media(max-width:420px){
+.grid.four-kpi{grid-template-columns:1fr 1fr!important;gap:8px!important}.hero-tools{width:100%;justify-content:space-between}.input{font-size:13px}
+.tiles,.tiles3,.tiles2,.tiles5,.tiles6{grid-template-columns:1fr 1fr!important}
+.grid{gap:6px}.card{padding:10px 9px;border-radius:10px}.card .label{font-size:9px;letter-spacing:.05em;gap:4px}.value{font-size:19px}.value.sm{font-size:14px}.sub{font-size:10px}
+.pp{padding:4px 5px;gap:4px}.pp b{font-size:11px}.pp .k{font-size:8px}.pprow{gap:4px}
+.subtile{padding:8px 8px}.subtile .val{font-size:15px}
 }
 </style>
 </head>
@@ -102,8 +110,37 @@ main{padding:15px 12px}.hero{margin-bottom:14px}.hero h2{font-size:21px}.hero p{
   <div class="card kpi"><div class="label" data-tip="Requests waiting for the scheduler. Stays >0 while Running is at capacity = overloaded or stalled on cache pressure.">Queued <span class="tip">i</span></div><div class="value" id="queued">—</div><div class="sub">waiting for scheduler</div></div>
   <div class="card kpi"><div class="label" data-tip="Output tokens per second the server is producing right now. 0 when idle.">Throughput <span class="tip">i</span></div><div class="value" id="throughput">—</div><div class="sub">tokens / second</div></div>
   <div class="card kpi"><div class="label" data-tip="Time-to-first-token. How long a user waits before the first generated token appears.">TTFT <span class="tip">i</span></div><div class="value sm" id="ttftVal">—</div><div class="pprow" id="ttftPp"></div></div>
+  <div class="card kpi"><div class="label" data-tip="Share of prompt tokens in the selected window (15s/1m/5m/15m) served from cache (GPU + host + storage) instead of being recomputed. Computed from prefill_effective_tokens_total deltas over the window: rate(sum of *_hit) / rate(sum of all modes). Reset-aware: a server restart re-baselines the history. The cache_hit_rate gauge reads 0 whenever the server is idle — this is the number to trust.">Prefix Hit Rate <span class="tip">i</span></div><div class="value" id="hitKpi">—</div><div class="sub" id="hitKpiSub">over the active window</div></div>
 </div>
-<!-- 4. GPU KV Cache (the central question) -->
+<!-- 4. Cache Effectiveness (prefix cache — promoted) -->
+<div class="section">Cache Effectiveness</div>
+<div class="grid">
+  <div class="card"><div class="label" data-tip="True hit rate over the selected window (15s/1m/5m/15m): delta of prefill_effective_tokens_total between now and a timestamped snapshot ~window ago — not a single 2s poll, so it is immune to per-poll noise. Reads null when there was no prefill traffic in the whole window. Server restarts are detected and the history re-baselines automatically.">Windowed hit rate <span class="tip">i</span></div><div class="value" id="hitWindow">—</div><div class="sub" id="hitWindowSub">over the active window</div></div>
+  <div class="card"><div class="label" data-tip="Hit rate across everything the server has seen since startup: sum of *_hit / sum of all modes of prefill_effective_tokens_total. A stable baseline; the windowed rate tells you what is happening right now.">Since-startup hit rate <span class="tip">i</span></div><div class="value" id="hitCum">—</div><div class="sub" id="hitCumSub">cumulative, since startup</div></div>
+  <div class="card"><div class="label" data-tip="SGLang's own reported cache_hit_rate gauge. Useful as a point-in-time reading, but can be 0 on an idle server.">Reported hit rate <span class="tip">i</span></div><div class="value" id="hit">—</div><div class="sub" id="hitSub">SGLang gauge</div></div>
+  <div class="card wide"><div class="label">Prefill Effective Tokens (since startup) <span class="muted" style="font-weight:500;text-transform:none;letter-spacing:0">• cumulative</span></div>
+    <div class="bars">
+      <div class="barrow"><span data-tip="Tokens that had to be computed from scratch. The 'miss' portion of prefill.">Input / miss<span class="tip">i</span></span><div class="track"><div class="fill" id="inputBar"></div></div><b id="inputVal">—</b></div>
+      <div class="barrow"><span data-tip="Tokens whose prefix was already cached on the GPU.">Device hit<span class="tip">i</span></span><div class="track"><div class="fill green" id="devBar"></div></div><b id="devVal">—</b></div>
+      <div class="barrow"><span data-tip="Tokens whose prefix was found in the host HiCache and had to be loaded back to GPU.">Host HiCache hit<span class="tip">i</span></span><div class="track"><div class="fill blue" id="hostBar2"></div></div><b id="hostVal">—</b></div>
+      <div class="barrow"><span data-tip="Tokens whose prefix was found in a persistent storage tier.">Storage hit<span class="tip">i</span></span><div class="track"><div class="fill purple" id="storeBar"></div></div><b id="storeVal">—</b></div>
+    </div>
+  </div>
+</div>
+<div class="charts" style="margin-top:14px">
+  <div class="card"><div class="label">Prefix hit rate <span class="muted" style="font-weight:500;text-transform:none;letter-spacing:0">• % of prompt tokens served from cache, per window</span></div><div class="chartbox"><canvas id="hitChart"></canvas></div></div>
+  <div class="card">
+    <div class="label" data-tip="Of all cached prompt tokens since startup, what share was recovered from each tier. Shows where the prefix reuse is actually coming from.">Where cache hits come from <span class="tip">i</span> <span class="muted" style="font-weight:500;text-transform:none;letter-spacing:0">• share of hits, since startup</span></div>
+    <div class="bars">
+      <div class="barrow"><span>GPU (device)</span><div class="track"><div class="fill green" id="tierDevBar"></div></div><b id="tierDevVal">—</b></div>
+      <div class="barrow"><span>Host (HiCache L2)</span><div class="track"><div class="fill blue" id="tierHostBar"></div></div><b id="tierHostVal">—</b></div>
+      <div class="barrow"><span>Storage (L3)</span><div class="track"><div class="fill purple" id="tierStoreBar"></div></div><b id="tierStoreVal">—</b></div>
+    </div>
+    <div class="muted" id="tierNote" style="margin-top:10px;font-size:11px"></div>
+  </div>
+</div>
+
+<!-- 5. GPU KV Cache (the central question) -->
 <div class="section">GPU KV Cache <span class="muted" style="font-weight:500;text-transform:none;letter-spacing:0">— ACTIVE (in use) · EVICTABLE (cached) · FREE (empty)</span></div>
 <div class="card">
   <div class="tiles tiles6" id="kvTiles"></div>
@@ -163,21 +200,6 @@ main{padding:15px 12px}.hero{margin-bottom:14px}.hero h2{font-size:21px}.hero p{
   <div id="l3Extra" class="muted" style="font-size:12px;margin-top:8px">No additional NIXL metrics detected by this endpoint.</div>
 </div>
 
-<!-- 8. Cache Effectiveness -->
-<div class="section">Cache Effectiveness</div>
-<div class="grid">
-  <div class="card"><div class="label" data-tip="Windowed cache hit rate computed from the change in prefill_effective_tokens_total counters. Distinct from SGLang's own gauge, which can read 0 simply because the server is idle.">Windowed hit rate <span class="tip">i</span></div><div class="value" id="hitWindow">—</div><div class="sub" id="hitWindowSub">over the active window</div></div>
-  <div class="card"><div class="label" data-tip="SGLang's own reported cache_hit_rate gauge. Useful as a point-in-time reading, but can be 0 on an idle server.">Reported hit rate <span class="tip">i</span></div><div class="value" id="hit">—</div><div class="sub" id="hitSub">SGLang gauge</div></div>
-  <div class="card wide" style="grid-column:span 2"><div class="label">Prefill Effective Tokens (since startup) <span class="muted" style="font-weight:500;text-transform:none;letter-spacing:0">• cumulative</span></div>
-    <div class="bars">
-      <div class="barrow"><span data-tip="Tokens that had to be computed from scratch. The 'miss' portion of prefill.">Input / miss<span class="tip">i</span></span><div class="track"><div class="fill" id="inputBar"></div></div><b id="inputVal">—</b></div>
-      <div class="barrow"><span data-tip="Tokens whose prefix was already cached on the GPU.">Device hit<span class="tip">i</span></span><div class="track"><div class="fill green" id="devBar"></div></div><b id="devVal">—</b></div>
-      <div class="barrow"><span data-tip="Tokens whose prefix was found in the host HiCache and had to be loaded back to GPU.">Host HiCache hit<span class="tip">i</span></span><div class="track"><div class="fill blue" id="hostBar2"></div></div><b id="hostVal">—</b></div>
-      <div class="barrow"><span data-tip="Tokens whose prefix was found in a persistent storage tier.">Storage hit<span class="tip">i</span></span><div class="track"><div class="fill purple" id="storeBar"></div></div><b id="storeVal">—</b></div>
-    </div>
-  </div>
-</div>
-
 <!-- 9. Requests & Scheduler (sub-queues) -->
 <div class="section">Scheduler Sub-queues <span class="muted" style="font-weight:500;text-transform:none;letter-spacing:0">— where queued work is actually stuck</span></div>
 <div class="card">
@@ -211,9 +233,10 @@ main{padding:15px 12px}.hero{margin-bottom:14px}.hero h2{font-size:21px}.hero p{
 
 <script>
 const state={running:true,timer:null,last:null,
-  hist:{t:[],r:[],q:[],tp:[],back:[],load:[],active:[],evictable:[],free:[],l3back:[],l3hit:[]},
-  prevCounters:null,rawFilter:'',window:60,l3Sig:''};
-const wanted=['num_running_reqs','num_queue_reqs','token_usage','max_total_num_tokens','gen_throughput','cache_hit_rate','kv_cache_memory_usage_gb','kv_used_tokens','kv_evictable_tokens','kv_available_tokens','hicache_host_used_tokens','hicache_host_total_tokens','hicache_backup_tokens_total','hicache_backup_bytes_total','load_back_tokens_total','hicache_dropped_tokens_total','backuped_tokens_total','prefill_effective_tokens_total','cached_tokens_total','weight_memory_usage_gb','graph_memory_usage_gb','startup_available_gpu_memory_gb','mamba_used_tokens','mamba_available_tokens','mamba_evictable_tokens','mamba_usage','spec_accept_length','spec_accept_rate','per_stage_req_latency_seconds','queue_time_seconds','evicted_tokens_total','prompt_tokens_total','generation_tokens_total','num_prefill_bootstrap_queue_reqs','num_prefill_inflight_queue_reqs','num_decode_prealloc_queue_reqs','num_decode_transfer_queue_reqs','num_grammar_queue_reqs'];
+  hist:{t:[],r:[],q:[],tp:[],back:[],load:[],active:[],evictable:[],free:[],l3back:[],l3hit:[],hit:[],hitInst:[]},
+  counterHist:[],prevCounters:null,rawFilter:'',window:60,l3Sig:''};
+function winLabel(){const w=state.window||60;return w<60?w+'s':(w%3600===0?(w/3600)+'h':(w/60)+'m')}
+const wanted=['num_running_reqs','num_queue_reqs','token_usage','max_total_num_tokens','gen_throughput','cache_hit_rate','kv_cache_memory_usage_gb','kv_used_tokens','kv_evictable_tokens','kv_available_tokens','hicache_host_used_tokens','hicache_host_total_tokens','hicache_backup_tokens_total','hicache_backup_bytes_total','load_back_tokens_total','hicache_dropped_tokens_total','backuped_tokens_total','prefill_effective_tokens_total','cached_tokens_total','weight_memory_usage_gb','graph_memory_usage_gb','startup_available_gpu_memory_gb','mamba_used_tokens','mamba_available_tokens','mamba_evictable_tokens','mamba_usage','spec_accept_length','spec_accept_rate','per_stage_req_latency_seconds','queue_time_seconds','evicted_tokens_total','prompt_tokens_total','generation_tokens_total','num_prefill_bootstrap_queue_reqs','num_prefill_inflight_queue_reqs','num_decode_prealloc_queue_reqs','num_decode_transfer_queue_reqs','num_grammar_queue_reqs','realtime_tokens_total','prefetched_tokens_total'];
 const colors={grid:'#3a3a3a',text:'#e8e8e8',axis:'#cfcfcf',palette:['#ff7a00','#5aa6ff','#31d17c','#b48cff','#f5c542','#ff4d4d']};
 function esc(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
 function safeNaN(n){return (n==null||Number.isNaN(n))?null:n}
@@ -233,7 +256,10 @@ function sumByLabel(p,short,label,value){const n=findName(p,short);if(!n||!p[n])
 function pick(p,short){const n=findName(p,short);if(!n||!p[n])return null;return safeNaN(p[n][0].value)}
 function pickSum(p,short){const n=findName(p,short);if(!n||!p[n])return null;let t=0,any=false;for(const x of p[n]){const v=safeNaN(x.value);if(v!=null){t+=v;any=true}}return any?t:null}
 function set(id,v){const el=document.getElementById(id);if(el)el.textContent=v}
-function setWidth(id,v){const el=document.getElementById(id);if(el)el.style.width=Math.max(0,Math.min(100,v||0))+'%'}
+// Touch devices have no :hover — mirror data-tip into title so info icons still work (long-press).
+const NO_HOVER=matchMedia('(hover:none)').matches;
+function touchTips(){if(!NO_HOVER)return;for(const el of document.querySelectorAll('[data-tip]'))if(!el.hasAttribute('title'))el.setAttribute('title',el.getAttribute('data-tip'))}
+function setWidth(id,v){const el=document.getElementById(id);if(!el)return;const n=parseFloat(v);el.style.width=(Number.isNaN(n)?0:Math.max(0,Math.min(100,n)))+'%'}
 // Detect which external storage backend(s) the endpoint references, from any storage_backend label.
 function detectL3Backend(p){const s=new Set();for(const n of Object.keys(p)){for(const x of p[n]){const mm=(x.labels||'').match(/storage_backend="([^"]+)"/);if(mm)s.add(mm[1])}}return s.size?[...s]:null}
 // Any other exposed metrics carrying a storage_backend label (latency, errors, load-back, ...). Never inferred.
@@ -296,6 +322,10 @@ function compute(p){
  }
  m.cachedDev=sumByLabel(p,'cached_tokens_total','cache_source','device');
  m.cachedHost=sumByLabel(p,'cached_tokens_total','cache_source','host');
+ // Fallback windowed-rate source: realtime_tokens_total {mode="prefill_cache"|"prefill_compute"}
+ m.rtCache=sumByLabel(p,'realtime_tokens_total','mode','prefill_cache');
+ m.rtCompute=sumByLabel(p,'realtime_tokens_total','mode','prefill_compute');
+ m.prefetchedNixl=sumByLabel(p,'prefetched_tokens_total','storage_backend','nixl') ?? pickSum(p,'prefetched_tokens_total');
  m.lat=parseHistogram(p,'per_stage_req_latency_seconds');
  m.qt=parseHistogram(p,'queue_time_seconds');
  m.specAcceptLen=pick(p,'spec_accept_length');
@@ -310,9 +340,46 @@ function compute(p){
  return m;
 }
 
-function computeRates(m){
+function computeRates(m,live){
  const now=performance.now();
  const prev=state.prevCounters;
+ // Cumulative (since-startup) prefix-cache hit rate + per-tier share of the hits.
+ // Cumulative uses the absolute counter values, so a server restart self-corrects it.
+ const cumIn=m.prefInput??0,cumDev=m.prefDevHit??0,cumHost=m.prefHostHit??0,cumStore=m.prefStoreHit??0;
+ const cumHits=cumDev+cumHost+cumStore,cumTot=cumHits+cumIn;
+ m.hitCum=cumTot>0?cumHits/cumTot:null;
+ if(cumHits>0){m.shareDev=cumDev/cumHits;m.shareHost=cumHost/cumHits;m.shareStore=cumStore/cumHits;m.hasTierShare=true}
+ else{m.shareDev=m.shareHost=m.shareStore=null;m.hasTierShare=cumTot>0}
+ // --- Counter ring buffer: timestamped snapshots for window-aligned rates ---
+ const cur={input:m.prefInput,dev:m.prefDevHit,host:m.prefHostHit,store:m.prefStoreHit,rtC:m.rtCache,rtP:m.rtCompute};
+ const H=state.counterHist;
+ if(live){
+   const last=H[H.length-1];
+   // Counter reset (server restart): any tracked counter decreased → discard pre-restart history.
+   const wentDown=(k)=>safeNaN(cur[k])!=null&&safeNaN(last?.[k])!=null&&cur[k]<last[k]-1e-6;
+   if(last&&['input','dev','host','store','rtC','rtP'].some(wentDown))H.length=0;
+   if(!H.length||now-H[H.length-1].ms>=250)H.push(Object.assign({ms:now},cur));
+   const cut=now-960000; // keep 16 min (covers the 15m window + margin)
+   while(H.length&&H[0].ms<cut)H.shift();
+ }
+ // Window-aligned hit rate: delta against the snapshot ~window ago (not the last poll).
+ const wms=(state.window||60)*1000;
+ let base=null;
+ for(let i=H.length-1;i>=0;i--){if(H[i].ms<=now-wms){base=H[i];break}}
+ if(!base&&H.length>1&&now-H[0].ms>1000)base=H[0]; // buffer younger than window → use oldest available
+ if(base){
+   const dlt=(k)=>{const a=cur[k],b=base[k];return safeNaN(a)!=null&&safeNaN(b)!=null?Math.max(0,a-b):0};
+   const wIn=dlt('input'),wDev=dlt('dev'),wHost=dlt('host'),wStore=dlt('store');
+   const wHits=wDev+wHost+wStore,wTot=wHits+wIn;
+   m.hitWin=wTot>0?wHits/wTot:null;
+   m.hitWinSrc='prefill_effective';
+   m.hitWinSpan=(now-base.ms)/1000;
+   if(m.hitWin==null&&safeNaN(cur.rtC)!=null&&safeNaN(cur.rtP)!=null){
+     const dC=dlt('rtC'),dP=dlt('rtP');
+     if(dC+dP>0){m.hitWin=dC/(dC+dP);m.hitWinSrc='realtime'}
+   }
+ } else {m.hitWin=null;m.hitWinSpan=null}
+ // --- Instant (per-poll) rates ---
  if(prev){
    const dt=Math.max(0.25,(now-prev.t)/1000);
    const d=(a,b)=>safeNaN(a)!=null&&safeNaN(b)!=null?Math.max(0,((a-b)/dt)):0;
@@ -329,7 +396,7 @@ function computeRates(m){
    m.l3HitPct=tot>0?dStore/tot:null;
  } else {m.backupRate=m.loadRate=m.evictRate=m.dropRate=0; m.hitWindow=null;
    m.l3BackupRate=safeNaN(m.l3BackupTok)!=null?0:null; m.l3HitRate=safeNaN(m.prefStoreHit)!=null?0:null; m.l3HitPct=null}
- state.prevCounters={t:now,bk:m.backupTok??0,lb:m.loadBackTok??0,ev:m.evictTok??0,dr:m.dropTok??0,pIn:m.prefInput??0,pDev:m.prefDevHit??0,pHost:m.prefHostHit??0,pStore:m.prefStoreHit??0,l3bk:m.l3BackupTok??0};
+ state.prevCounters={t:now,bk:m.backupTok??0,lb:m.loadBackTok??0,ev:m.evictTok??0,dr:m.dropTok??0,pIn:m.prefInput??0,pDev:m.prefDevHit??0,pHost:m.prefHostHit??0,pStore:m.prefStoreHit??0,l3bk:m.l3BackupTok??0,rtC:m.rtCache??0,rtP:m.rtCompute??0};
 }
 
 function mkChart(canvasId,datasets,units){
@@ -344,6 +411,7 @@ function initCharts(){
  charts.tp=mkChart('tpChart',[{label:'Tokens/s',data:state.hist.tp}],'tok/s');
  charts.hc=mkChart('hcChart',[{label:'Backup',data:state.hist.back},{label:'Load-back',data:state.hist.load}],'tok/s');
  charts.kv=mkChart('kvChart',[{label:'Active',data:state.hist.active,color:colors.palette[1]},{label:'Evictable',data:state.hist.evictable,color:colors.palette[3]},{label:'Free',data:state.hist.free,color:colors.palette[2]}],'tokens');
+ charts.hit=mkChart('hitChart',[{label:`Windowed (${winLabel()})`,data:state.hist.hit,color:colors.palette[2]},{label:'Instant (per-poll)',data:state.hist.hitInst,color:colors.palette[0]}],'%');
 }
 function refreshCharts(){
  if(!charts.req)return;
@@ -425,11 +493,32 @@ function render(m,p){
  if(subItems.length){subEl.className='tiles tiles6';tile('subqTiles',subItems);}
  else{subEl.className='muted';subEl.style.cssText='grid-column:1/-1;font-size:12px;padding:6px';subEl.textContent='Sub-queue metrics not exposed by this endpoint.';}
 
- set('hitWindow', m.hitWindow==null?'—':fmtPct(m.hitWindow,1));
- set('hitWindowSub', m.hitWindow==null?'no prefill activity this window':'from prefill counter deltas');
+ // Window-aligned card: true "hit rate over the last <window>".
+ set('hitWindow', m.hitWin==null?'—':fmtPct(m.hitWin,1));
+ let wsub;
+ if(m.hitWin==null)wsub='no prefill activity in window';
+ else if(m.hitWinSrc==='realtime')wsub='from realtime_tokens_total';
+ else if(m.hitWinSpan!=null&&m.hitWinSpan<(state.window||60)-5)wsub=`over ${Math.round(m.hitWinSpan)}s (history still filling)`;
+ else wsub=`over the last ${winLabel()}`;
+ set('hitWindowSub', wsub);
  set('hit',fmtPct(m.hitRate,1));
+ set('hitSub', (m.hitRate===0&&(m.running||0)===0&&(m.queued||0)===0)?'SGLang gauge — 0 likely means idle':'SGLang gauge');
+ set('hitCum', m.hitCum==null?'—':fmtPct(m.hitCum,1));
+ set('hitCumSub', m.hitCum==null?'no prefill activity since startup':'cumulative, since startup');
+ // Headline KPI tile: window-aligned rate, with since-startup as the sub-line.
+ set('hitKpi', m.hitWin!=null?fmtPct(m.hitWin,1):(m.hitCum!=null?fmtPct(m.hitCum,1):'—'));
+ const ksub=document.getElementById('hitKpiSub');
+ if(ksub)ksub.textContent=m.hitWin!=null?(m.hitCum!=null?`last ${winLabel()} • ${fmtPct(m.hitCum,1)} since startup`:`last ${winLabel()}`):((m.running||0)===0&&(m.queued||0)===0?'no load — idle':'over the active window');
  const tot2=(m.prefInput||0)+(m.prefDevHit||0)+(m.prefHostHit||0)+(m.prefStoreHit||0);
  [['input',m.prefInput],['dev',m.prefDevHit],['host',m.prefHostHit],['store',m.prefStoreHit]].forEach(([x,v])=>{set(x+'Val',humanTokens(v));setWidth(x+'Bar',tot2?100*(v||0)/tot2:0)});
+ // Per-tier share of all cache hits (since startup).
+ if(m.hasTierShare){
+  [['tierDev',m.shareDev],['tierHost',m.shareHost],['tierStore',m.shareStore]].forEach(([x,v])=>{setWidth(x+'Bar',(v||0)*100);set(x+'Val',fmtPct(v,1))});
+  set('tierNote','');
+ } else {
+  [['tierDev'],['tierHost'],['tierStore']].forEach(([x])=>{setWidth(x+'Bar',0);set(x+'Val','—')});
+  set('tierNote','No cache hits recorded yet — shares will appear once prefill traffic is served from cache.');
+ }
 
  set('backupTok',humanTokens(m.backupTok));
  set('backupBytes',bytes(m.backupBytes));
@@ -485,7 +574,7 @@ function render(m,p){
  if(extraEl){
    if(m.l3Extra&&m.l3Extra.length){
      extraEl.className='';
-     extraEl.innerHTML=m.l3Extra.slice(0,12).map(e=>`<div style="display:flex;justify-content:space-between;gap:10px;padding:6px 0;border-bottom:1px solid #232323"><span>${esc(e.name)} <span class="muted">${esc(e.labels)}</span></span><b>${esc(fmt(e.value,2))}</b></div>`).join('');
+     extraEl.innerHTML=m.l3Extra.slice(0,12).map(e=>`<div style="display:flex;justify-content:space-between;gap:10px;padding:6px 0;border-bottom:1px solid #232323;flex-wrap:wrap;overflow-wrap:anywhere"><span style="min-width:0">${esc(e.name)} <span class="muted">${esc(e.labels)}</span></span><b>${esc(fmt(e.value,2))}</b></div>`).join('');
    } else {extraEl.className='muted';extraEl.textContent='No additional NIXL metrics detected by this endpoint.';}
  }
  const l3Sig=(m.l3BackupTok!=null?'1':'0')+'-'+(m.prefStoreHit!=null?'1':'0');
@@ -503,6 +592,8 @@ function render(m,p){
  state.hist.free.push(m.kvAvail||0);
  state.hist.l3back.push(m.l3BackupRate||0);
  state.hist.l3hit.push(m.l3HitRate||0);
+ state.hist.hit.push(m.hitWin!=null?+(m.hitWin*100).toFixed(2):null);
+ state.hist.hitInst.push(m.hitWindow!=null?+(m.hitWindow*100).toFixed(2):null);
  const keep=state.window*4;
  if(state.hist.t.length>keep) for(const k of Object.keys(state.hist)) state.hist[k].shift();
  refreshCharts();
@@ -516,6 +607,7 @@ function render(m,p){
   }
  }
  document.getElementById('table').innerHTML=rows.length?rows.join(''):'<tr><td colspan="3" class="empty">No matching SGLang metrics found.</td></tr>';
+ touchTips();
 }
 
 function health(m){
@@ -552,7 +644,7 @@ async function poll(){
   const p=parseProm(text);
   if(!Object.keys(p).length)throw new Error('Empty/invalid Prometheus response');
   state.last=p;
-  const m=compute(p); computeRates(m); render(m,p);
+  const m=compute(p); computeRates(m,true); render(m,p);
   const latency=Math.round(performance.now()-started);
   document.getElementById('status').textContent=`Live • ${latency}ms`;
   document.getElementById('dot').className='dot ok';
@@ -566,7 +658,8 @@ async function poll(){
 }
 function connect(){
  state.running=true;pollSeq++;clearTimeout(state.timer);
- state.hist={t:[],r:[],q:[],tp:[],back:[],load:[],active:[],evictable:[],free:[],l3back:[],l3hit:[]};
+ state.hist={t:[],r:[],q:[],tp:[],back:[],load:[],active:[],evictable:[],free:[],l3back:[],l3hit:[],hit:[],hitInst:[]};
+ state.counterHist=[];
  state.prevCounters=null;
  state.l3Sig='';
  document.getElementById('pause').textContent='Pause';
@@ -586,9 +679,9 @@ document.getElementById('interval').addEventListener('change',()=>{if(state.runn
 const controls=document.getElementById('controls');
 function toggleControls(){controls.classList.toggle('closed')}
 document.getElementById('statusline').addEventListener('click',()=>{if(matchMedia('(max-width:700px)').matches)toggleControls()});
-document.getElementById('rawSearch').addEventListener('input',(e)=>{state.rawFilter=e.target.value;if(state.last){const m=compute(state.last);computeRates(m);render(m,state.last)}});
-document.querySelectorAll('#windowSel button').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('#windowSel button').forEach(x=>x.classList.remove('on'));b.classList.add('on');state.window=Number(b.dataset.w);if(state.last){const m=compute(state.last);computeRates(m);render(m,state.last)}}));
-initCharts();
+document.querySelectorAll('#windowSel button').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('#windowSel button').forEach(x=>x.classList.remove('on'));b.classList.add('on');state.window=Number(b.dataset.w);if(charts.hit){charts.hit.data.datasets[0].label=`Windowed (${winLabel()})`;charts.hit.update('none')}if(state.last){const m=compute(state.last);computeRates(m,false);render(m,state.last)}}));
+document.getElementById('rawSearch').addEventListener('input',(e)=>{state.rawFilter=e.target.value;if(state.last){const m=compute(state.last);computeRates(m,false);render(m,state.last)}});
+initCharts();touchTips();
 </script>
 </body>
 </html>
