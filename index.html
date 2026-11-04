@@ -91,42 +91,6 @@ main{padding:15px 12px}.hero{margin-bottom:14px}.hero h2{font-size:21px}.hero p{
   </div>
 </div>
 
-<!-- 2. At-a-glance "Now" strip (promoted) -->
-<div class="grid four-kpi">
-  <div class="card kpi"><div class="label" data-tip="Requests currently being processed by the model. Together with the Queue number, tells you how loaded the scheduler is.">Running <span class="tip">i</span></div><div class="value accent" id="running">—</div><div class="sub">currently executing</div></div>
-  <div class="card kpi"><div class="label" data-tip="Requests waiting for the scheduler. Stays >0 while Running is at capacity = overloaded or stalled on cache pressure.">Queued <span class="tip">i</span></div><div class="value" id="queued">—</div><div class="sub">waiting for scheduler</div></div>
-  <div class="card kpi"><div class="label" data-tip="Output tokens per second the server is producing right now. 0 when idle.">Throughput <span class="tip">i</span></div><div class="value" id="throughput">—</div><div class="sub">tokens / second</div></div>
-  <div class="card kpi"><div class="label" data-tip="Time-to-first-token. How long a user waits before the first generated token appears.">TTFT <span class="tip">i</span></div><div class="value sm" id="ttftVal">—</div><div class="pprow" id="ttftPp"></div></div>
-  <div class="card kpi"><div class="label" data-tip="Share of prompt tokens in the selected window (15s/1m/5m/15m) served from cache (GPU + host + storage) instead of being recomputed. Computed from prefill_effective_tokens_total deltas over the window: rate(sum of *_hit) / rate(sum of all modes). Reset-aware: a server restart re-baselines the history. The cache_hit_rate gauge reads 0 whenever the server is idle — this is the number to trust.">Prefix Hit Rate <span class="tip">i</span></div><div class="value" id="hitKpi">—</div><div class="sub" id="hitKpiSub">over the active window</div></div>
-</div>
-<!-- 4. Cache Effectiveness (prefix cache — promoted) -->
-<div class="section">Cache Effectiveness</div>
-<div class="grid">
-  <div class="card"><div class="label" data-tip="True hit rate over the selected window (15s/1m/5m/15m): delta of prefill_effective_tokens_total between now and a timestamped snapshot ~window ago — not a single 2s poll, so it is immune to per-poll noise. Reads null when there was no prefill traffic in the whole window. Server restarts are detected and the history re-baselines automatically.">Windowed hit rate <span class="tip">i</span></div><div class="value" id="hitWindow">—</div><div class="sub" id="hitWindowSub">over the active window</div></div>
-  <div class="card"><div class="label" data-tip="Hit rate across everything the server has seen since startup: sum of *_hit / sum of all modes of prefill_effective_tokens_total. A stable baseline; the windowed rate tells you what is happening right now.">Since-startup hit rate <span class="tip">i</span></div><div class="value" id="hitCum">—</div><div class="sub" id="hitCumSub">cumulative, since startup</div></div>
-  <div class="card"><div class="label" data-tip="SGLang's own reported cache_hit_rate gauge. Useful as a point-in-time reading, but can be 0 on an idle server.">Reported hit rate <span class="tip">i</span></div><div class="value" id="hit">—</div><div class="sub" id="hitSub">SGLang gauge</div></div>
-  <div class="card wide"><div class="label">Prefill Effective Tokens (since startup) <span class="muted" style="font-weight:500;text-transform:none;letter-spacing:0">• cumulative</span></div>
-    <div class="bars">
-      <div class="barrow"><span data-tip="Tokens that had to be computed from scratch. The 'miss' portion of prefill.">Input / miss<span class="tip">i</span></span><div class="track"><div class="fill" id="inputBar"></div></div><b id="inputVal">—</b></div>
-      <div class="barrow"><span data-tip="Tokens whose prefix was already cached on the GPU.">Device hit<span class="tip">i</span></span><div class="track"><div class="fill green" id="devBar"></div></div><b id="devVal">—</b></div>
-      <div class="barrow"><span data-tip="Tokens whose prefix was found in the host HiCache and had to be loaded back to GPU.">Host HiCache hit<span class="tip">i</span></span><div class="track"><div class="fill blue" id="hostBar2"></div></div><b id="hostVal">—</b></div>
-      <div class="barrow"><span data-tip="Tokens whose prefix was found in a persistent storage tier.">Storage hit<span class="tip">i</span></span><div class="track"><div class="fill purple" id="storeBar"></div></div><b id="storeVal">—</b></div>
-    </div>
-  </div>
-</div>
-<div class="charts" style="margin-top:14px">
-  <div class="card"><div class="label">Prefix hit rate <span class="muted" style="font-weight:500;text-transform:none;letter-spacing:0">• % of prompt tokens served from cache, per window</span></div><div class="chartbox"><canvas id="hitChart"></canvas></div></div>
-  <div class="card">
-    <div class="label" data-tip="Of all cached prompt tokens since startup, what share was recovered from each tier. Shows where the prefix reuse is actually coming from.">Where cache hits come from <span class="tip">i</span> <span class="muted" style="font-weight:500;text-transform:none;letter-spacing:0">• share of hits, since startup</span></div>
-    <div class="bars">
-      <div class="barrow"><span>GPU (device)</span><div class="track"><div class="fill green" id="tierDevBar"></div></div><b id="tierDevVal">—</b></div>
-      <div class="barrow"><span>Host (HiCache L2)</span><div class="track"><div class="fill blue" id="tierHostBar"></div></div><b id="tierHostVal">—</b></div>
-      <div class="barrow"><span>Storage (L3)</span><div class="track"><div class="fill purple" id="tierStoreBar"></div></div><b id="tierStoreVal">—</b></div>
-    </div>
-    <div class="muted" id="tierNote" style="margin-top:10px;font-size:11px"></div>
-  </div>
-</div>
-
 <!-- 5. GPU KV Cache (the central question) -->
 <div class="section">GPU KV Cache <span class="muted" style="font-weight:500;text-transform:none;letter-spacing:0">— ACTIVE (in use) · EVICTABLE (cached) · FREE (empty)</span></div>
 <div class="card">
@@ -163,6 +127,33 @@ main{padding:15px 12px}.hero{margin-bottom:14px}.hero h2{font-size:21px}.hero p{
   <div class="card"><div class="label">KV pool breakdown <span class="muted" style="font-weight:500;text-transform:none;letter-spacing:0">• active vs evictable vs free</span></div><div class="chartbox"><canvas id="kvChart"></canvas></div></div>
 </div>
 
+<!-- 2. At-a-glance "Now" strip (promoted) -->
+<div class="grid four-kpi">
+  <div class="card kpi"><div class="label" data-tip="Requests currently being processed by the model. Together with the Queue number, tells you how loaded the scheduler is.">Running <span class="tip">i</span></div><div class="value accent" id="running">—</div><div class="sub">currently executing</div></div>
+  <div class="card kpi"><div class="label" data-tip="Requests waiting for the scheduler. Stays >0 while Running is at capacity = overloaded or stalled on cache pressure.">Queued <span class="tip">i</span></div><div class="value" id="queued">—</div><div class="sub">waiting for scheduler</div></div>
+  <div class="card kpi"><div class="label" data-tip="Output tokens per second the server is producing right now. 0 when idle.">Throughput <span class="tip">i</span></div><div class="value" id="throughput">—</div><div class="sub">tokens / second</div></div>
+  <div class="card kpi"><div class="label" data-tip="Time-to-first-token. How long a user waits before the first generated token appears.">TTFT <span class="tip">i</span></div><div class="value sm" id="ttftVal">—</div><div class="pprow" id="ttftPp"></div></div>
+  <div class="card kpi"><div class="label" data-tip="Share of prompt tokens in the selected window (15s/1m/5m/15m) served from cache (GPU + host + storage) instead of being recomputed. Computed from prefill_effective_tokens_total deltas over the window: rate(sum of *_hit) / rate(sum of all modes). Reset-aware: a server restart re-baselines the history. The cache_hit_rate gauge reads 0 whenever the server is idle — this is the number to trust.">Prefix Hit Rate <span class="tip">i</span></div><div class="value" id="hitKpi">—</div><div class="sub" id="hitKpiSub">over the active window</div></div>
+</div>
+<!-- 4. Cache Effectiveness (prefix cache — promoted) -->
+<div class="section">Cache Effectiveness</div>
+<div class="grid">
+  <div class="card"><div class="label" data-tip="True hit rate over the selected window (15s/1m/5m/15m): delta of prefill_effective_tokens_total between now and a timestamped snapshot ~window ago — not a single 2s poll, so it is immune to per-poll noise. Reads null when there was no prefill traffic in the whole window. Server restarts are detected and the history re-baselines automatically.">Windowed hit rate <span class="tip">i</span></div><div class="value" id="hitWindow">—</div><div class="sub" id="hitWindowSub">over the active window</div></div>
+  <div class="card"><div class="label" data-tip="Hit rate across everything the server has seen since startup: sum of *_hit / sum of all modes of prefill_effective_tokens_total. A stable baseline; the windowed rate tells you what is happening right now.">Since-startup hit rate <span class="tip">i</span></div><div class="value" id="hitCum">—</div><div class="sub" id="hitCumSub">cumulative, since startup</div></div>
+  <div class="card"><div class="label" data-tip="SGLang's own reported cache_hit_rate gauge. Useful as a point-in-time reading, but can be 0 on an idle server.">Reported hit rate <span class="tip">i</span></div><div class="value" id="hit">—</div><div class="sub" id="hitSub">SGLang gauge</div></div>
+  </div>
+<div class="charts" style="margin-top:14px">
+  <div class="card wide">
+    <div class="label" data-tip="Of all cached prompt tokens since startup, what share was recovered from each tier. Shows where the prefix reuse is actually coming from.">Where cache hits come from <span class="tip">i</span> <span class="muted" style="font-weight:500;text-transform:none;letter-spacing:0">• share of hits, since startup</span></div>
+    <div class="bars">
+      <div class="barrow"><span>GPU (device)</span><div class="track"><div class="fill green" id="tierDevBar"></div></div><b id="tierDevVal">—</b></div>
+      <div class="barrow"><span>Host (HiCache L2)</span><div class="track"><div class="fill blue" id="tierHostBar"></div></div><b id="tierHostVal">—</b></div>
+      <div class="barrow"><span>Storage (L3)</span><div class="track"><div class="fill purple" id="tierStoreBar"></div></div><b id="tierStoreVal">—</b></div>
+    </div>
+    <div class="muted" id="tierNote" style="margin-top:10px;font-size:11px"></div>
+  </div>
+</div>
+
 <!-- DEMOTED BELOW: GPU Memory breakdown -->
 <div class="section">GPU Memory <span class="muted" style="font-weight:500;text-transform:none;letter-spacing:0">— how GPU memory is split between weights, KV cache, CUDA graphs, and free space</span></div>
 <div class="card" id="gpuMemCard" style="margin-bottom:14px">
@@ -180,6 +171,20 @@ main{padding:15px 12px}.hero{margin-bottom:14px}.hero h2{font-size:21px}.hero p{
 <div class="charts" style="margin-top:14px">
   <div class="card"><div class="label">Throughput <span class="muted" style="font-weight:500;text-transform:none;letter-spacing:0">• last window</span></div><div class="chartbox"><canvas id="tpChart"></canvas></div></div>
   <div class="card"><div class="label">Running vs Queued <span class="muted" style="font-weight:500;text-transform:none;letter-spacing:0">• last window</span></div><div class="chartbox"><canvas id="reqChart"></canvas></div></div>
+</div>
+
+<!-- DEMOTED BELOW: prefill cache detail -->
+<div class="section">Prefill Cache Detail <span class="muted" style="font-weight:500;text-transform:none;letter-spacing:0">— hit-rate trend and prefill token sources</span></div>
+<div class="charts" style="margin-top:0">
+  <div class="card"><div class="label">Prefix hit rate <span class="muted" style="font-weight:500;text-transform:none;letter-spacing:0">• % of prompt tokens served from cache, per window</span></div><div class="chartbox"><canvas id="hitChart"></canvas></div></div>
+  <div class="card"><div class="label">Prefill Effective Tokens (since startup) <span class="muted" style="font-weight:500;text-transform:none;letter-spacing:0">• cumulative</span></div>
+    <div class="bars">
+      <div class="barrow"><span data-tip="Tokens that had to be computed from scratch. The 'miss' portion of prefill.">Input / miss<span class="tip">i</span></span><div class="track"><div class="fill" id="inputBar"></div></div><b id="inputVal">—</b></div>
+      <div class="barrow"><span data-tip="Tokens whose prefix was already cached on the GPU.">Device hit<span class="tip">i</span></span><div class="track"><div class="fill green" id="devBar"></div></div><b id="devVal">—</b></div>
+      <div class="barrow"><span data-tip="Tokens whose prefix was found in the host HiCache and had to be loaded back to GPU.">Host HiCache hit<span class="tip">i</span></span><div class="track"><div class="fill blue" id="hostBar2"></div></div><b id="hostVal">—</b></div>
+      <div class="barrow"><span data-tip="Tokens whose prefix was found in a persistent storage tier.">Storage hit<span class="tip">i</span></span><div class="track"><div class="fill purple" id="storeBar"></div></div><b id="storeVal">—</b></div>
+    </div>
+  </div>
 </div>
 
 <!-- 7b. L3 Storage / NIXL (external storage tier) -->
