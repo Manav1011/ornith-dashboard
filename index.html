@@ -91,20 +91,7 @@ main{padding:15px 12px}.hero{margin-bottom:14px}.hero h2{font-size:21px}.hero p{
   </div>
 </div>
 
-<!-- 5. GPU Memory breakdown -->
-<div class="section">GPU Memory <span class="muted" style="font-weight:500;text-transform:none;letter-spacing:0">— how GPU memory is split between weights, KV cache, CUDA graphs, and free space</span></div>
-<div class="card" id="gpuMemCard" style="margin-bottom:14px">
-  <div class="stackbar" id="stackbar"><div class="seg seg-weight" id="segW"></div><div class="seg seg-kv" id="segK"></div><div class="seg seg-graph" id="segG"></div><div class="seg seg-free" id="segF"></div></div>
-  <div class="stacklegend">
-    <span><i style="background:#b48cff"></i>Weights <b id="memW">—</b></span>
-    <span><i style="background:#5aa6ff"></i>KV Cache <b id="memK">—</b></span>
-    <span><i style="background:#31d17c"></i>CUDA Graph <b id="memG">—</b></span>
-    <span><i style="background:#1f1f1f;border:1px solid #333"></i>Available <b id="memF">—</b></span>
-  </div>
-  <div class="muted" id="memWarn" style="margin-top:10px;font-size:11px"></div>
-</div>
-
-<!-- 2. At-a-glance "Now" strip + 3. Live charts -->
+<!-- 2. At-a-glance "Now" strip (promoted) -->
 <div class="grid four-kpi">
   <div class="card kpi"><div class="label" data-tip="Requests currently being processed by the model. Together with the Queue number, tells you how loaded the scheduler is.">Running <span class="tip">i</span></div><div class="value accent" id="running">—</div><div class="sub">currently executing</div></div>
   <div class="card kpi"><div class="label" data-tip="Requests waiting for the scheduler. Stays >0 while Running is at capacity = overloaded or stalled on cache pressure.">Queued <span class="tip">i</span></div><div class="value" id="queued">—</div><div class="sub">waiting for scheduler</div></div>
@@ -151,13 +138,7 @@ main{padding:15px 12px}.hero{margin-bottom:14px}.hero h2{font-size:21px}.hero p{
   </div>
 </div>
 
-<!-- 3. Live charts -->
-<div class="charts" style="margin-top:14px">
-  <div class="card"><div class="label">Throughput <span class="muted" style="font-weight:500;text-transform:none;letter-spacing:0">• last window</span></div><div class="chartbox"><canvas id="tpChart"></canvas></div></div>
-  <div class="card"><div class="label">Running vs Queued <span class="muted" style="font-weight:500;text-transform:none;letter-spacing:0">• last window</span></div><div class="chartbox"><canvas id="reqChart"></canvas></div></div>
-</div>
-
-<!-- 6. Host HiCache + 7. HiCache Transfers (the off-GPU tier) -->
+<!-- 6. Host HiCache + 7. HiCache Transfers (the off-GPU tier, promoted) -->
 <div class="section">Host HiCache &amp; Transfers <span class="muted" style="font-weight:500;text-transform:none;letter-spacing:0">— KV stored outside the GPU + movement between tiers</span></div>
 <div class="grid two">
   <div class="card">
@@ -180,6 +161,25 @@ main{padding:15px 12px}.hero{margin-bottom:14px}.hero h2{font-size:21px}.hero p{
 <div class="charts" style="margin-top:14px">
   <div class="card"><div class="label">Transfer rates <span class="muted" style="font-weight:500;text-transform:none;letter-spacing:0">• tokens / second</span></div><div class="chartbox"><canvas id="hcChart"></canvas></div></div>
   <div class="card"><div class="label">KV pool breakdown <span class="muted" style="font-weight:500;text-transform:none;letter-spacing:0">• active vs evictable vs free</span></div><div class="chartbox"><canvas id="kvChart"></canvas></div></div>
+</div>
+
+<!-- DEMOTED BELOW: GPU Memory breakdown -->
+<div class="section">GPU Memory <span class="muted" style="font-weight:500;text-transform:none;letter-spacing:0">— how GPU memory is split between weights, KV cache, CUDA graphs, and free space</span></div>
+<div class="card" id="gpuMemCard" style="margin-bottom:14px">
+  <div class="stackbar" id="stackbar"><div class="seg seg-weight" id="segW"></div><div class="seg seg-kv" id="segK"></div><div class="seg seg-graph" id="segG"></div><div class="seg seg-free" id="segF"></div></div>
+  <div class="stacklegend">
+    <span><i style="background:#b48cff"></i>Weights <b id="memW">—</b></span>
+    <span><i style="background:#5aa6ff"></i>KV Cache <b id="memK">—</b></span>
+    <span><i style="background:#31d17c"></i>CUDA Graph <b id="memG">—</b></span>
+    <span><i style="background:#1f1f1f;border:1px solid #333"></i>Available <b id="memF">—</b></span>
+  </div>
+  <div class="muted" id="memWarn" style="margin-top:10px;font-size:11px"></div>
+</div>
+
+<!-- DEMOTED BELOW: live charts -->
+<div class="charts" style="margin-top:14px">
+  <div class="card"><div class="label">Throughput <span class="muted" style="font-weight:500;text-transform:none;letter-spacing:0">• last window</span></div><div class="chartbox"><canvas id="tpChart"></canvas></div></div>
+  <div class="card"><div class="label">Running vs Queued <span class="muted" style="font-weight:500;text-transform:none;letter-spacing:0">• last window</span></div><div class="chartbox"><canvas id="reqChart"></canvas></div></div>
 </div>
 
 <!-- 7b. L3 Storage / NIXL (external storage tier) -->
