@@ -107,19 +107,6 @@ main{padding:15px 12px}.hero{margin-bottom:14px}.hero h2{font-size:21px}.hero p{
   <div class="card"><div class="label" data-tip="SGLang's own reported cache_hit_rate gauge. Useful as a point-in-time reading, but can be 0 on an idle server.">Reported hit rate <span class="tip">i</span></div><div class="value" id="hit">—</div><div class="sub" id="hitSub">SGLang gauge</div></div>
   </div>
 
-<div class="charts" style="margin-top:14px">
-  <div class="card wide">
-    <div class="label" data-tip="Cumulative tokens moved GPU → host, bytes moved, current rate, tokens moved back, current rate, and any host-pressure drops. Should be 0 in a healthy system.">HiCache Transfers <span class="tip">i</span></div>
-    <div class="grid hgrid" style="grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px">
-      <div class="subtile idle"><div class="lbl" data-tip="Cumulative number of KV tokens moved from GPU to host cache since startup. Counter — shows TOTAL since startup, not current cache size.">GPU → Host tokens <span class="tip">i</span></div><div class="val" id="backupTok">—</div><div class="muted" style="font-size:11px">since startup</div></div>
-      <div class="subtile idle"><div class="lbl" data-tip="Cumulative bytes moved GPU → host. Divided by hicache_backup_duration_seconds_sum, gives the achieved D→H bandwidth while transferring.">GPU → Host bytes <span class="tip">i</span></div><div class="val" id="backupBytes">—</div><div class="muted" style="font-size:11px">since startup</div></div>
-      <div class="subtile idle"><div class="lbl" data-tip="Live transfer rate, derived from the change in the backup counter between polls.">Backup rate (now) <span class="tip">i</span></div><div class="val" id="backupRate">—<span class="unit">tok/s</span></div><div class="muted" style="font-size:11px">live rate</div></div>
-      <div class="subtile idle"><div class="lbl" data-tip="Cumulative number of KV tokens moved from host cache back to GPU since startup.">Host → GPU tokens <span class="tip">i</span></div><div class="val" id="loadbackTok">—</div><div class="muted" style="font-size:11px">since startup</div></div>
-      <div class="subtile idle"><div class="lbl" data-tip="Live load-back rate.">Load-back rate (now) <span class="tip">i</span></div><div class="val" id="loadRate">—<span class="unit">tok/s</span></div><div class="muted" style="font-size:11px">live rate</div></div>
-      <div class="subtile idle"><div class="lbl" data-tip="KV tokens destroyed without a host backup — typically because the host cache was under pressure. Should be 0 in a healthy system.">Host pressure drops <span class="tip">i</span></div><div class="val" id="drops">—</div><div class="muted" style="font-size:11px" id="dropDetail">since startup</div></div>
-    </div>
-  </div>
-</div>
 
 <!-- 5. GPU KV Cache (the central question) -->
 <div class="section">GPU KV Cache <span class="muted" style="font-weight:500;text-transform:none;letter-spacing:0">— ACTIVE (in use) · EVICTABLE (cached) · FREE (empty)</span></div>
@@ -172,6 +159,20 @@ main{padding:15px 12px}.hero{margin-bottom:14px}.hero h2{font-size:21px}.hero p{
 <div class="charts" style="margin-top:14px">
   <div class="card"><div class="label">Throughput <span class="muted" style="font-weight:500;text-transform:none;letter-spacing:0">• last window</span></div><div class="chartbox"><canvas id="tpChart"></canvas></div></div>
   <div class="card"><div class="label">Running vs Queued <span class="muted" style="font-weight:500;text-transform:none;letter-spacing:0">• last window</span></div><div class="chartbox"><canvas id="reqChart"></canvas></div></div>
+</div>
+
+<div class="charts" style="margin-top:14px">
+  <div class="card wide">
+    <div class="label" data-tip="Cumulative tokens moved GPU → host, bytes moved, current rate, tokens moved back, current rate, and any host-pressure drops. Should be 0 in a healthy system.">HiCache Transfers <span class="tip">i</span></div>
+    <div class="grid hgrid" style="grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px">
+      <div class="subtile idle"><div class="lbl" data-tip="Cumulative number of KV tokens moved from GPU to host cache since startup. Counter — shows TOTAL since startup, not current cache size.">GPU → Host tokens <span class="tip">i</span></div><div class="val" id="backupTok">—</div><div class="muted" style="font-size:11px">since startup</div></div>
+      <div class="subtile idle"><div class="lbl" data-tip="Cumulative bytes moved GPU → host. Divided by hicache_backup_duration_seconds_sum, gives the achieved D→H bandwidth while transferring.">GPU → Host bytes <span class="tip">i</span></div><div class="val" id="backupBytes">—</div><div class="muted" style="font-size:11px">since startup</div></div>
+      <div class="subtile idle"><div class="lbl" data-tip="Live transfer rate, derived from the change in the backup counter between polls.">Backup rate (now) <span class="tip">i</span></div><div class="val" id="backupRate">—<span class="unit">tok/s</span></div><div class="muted" style="font-size:11px">live rate</div></div>
+      <div class="subtile idle"><div class="lbl" data-tip="Cumulative number of KV tokens moved from host cache back to GPU since startup.">Host → GPU tokens <span class="tip">i</span></div><div class="val" id="loadbackTok">—</div><div class="muted" style="font-size:11px">since startup</div></div>
+      <div class="subtile idle"><div class="lbl" data-tip="Live load-back rate.">Load-back rate (now) <span class="tip">i</span></div><div class="val" id="loadRate">—<span class="unit">tok/s</span></div><div class="muted" style="font-size:11px">live rate</div></div>
+      <div class="subtile idle"><div class="lbl" data-tip="KV tokens destroyed without a host backup — typically because the host cache was under pressure. Should be 0 in a healthy system.">Host pressure drops <span class="tip">i</span></div><div class="val" id="drops">—</div><div class="muted" style="font-size:11px" id="dropDetail">since startup</div></div>
+    </div>
+  </div>
 </div>
 
 <!-- DEMOTED BELOW: prefill cache detail -->
