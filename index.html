@@ -91,6 +91,14 @@ main{padding:15px 12px}.hero{margin-bottom:14px}.hero h2{font-size:21px}.hero p{
   </div>
 </div>
 
+<!-- 2. At-a-glance "Now" strip (promoted) -->
+<div class="grid four-kpi">
+  <div class="card kpi"><div class="label" data-tip="Requests currently being processed by the model. Together with the Queue number, tells you how loaded the scheduler is.">Running <span class="tip">i</span></div><div class="value accent" id="running">—</div><div class="sub">currently executing</div></div>
+  <div class="card kpi"><div class="label" data-tip="Requests waiting for the scheduler. Stays >0 while Running is at capacity = overloaded or stalled on cache pressure.">Queued <span class="tip">i</span></div><div class="value" id="queued">—</div><div class="sub">waiting for scheduler</div></div>
+  <div class="card kpi"><div class="label" data-tip="Output tokens per second the server is producing right now. 0 when idle.">Throughput <span class="tip">i</span></div><div class="value" id="throughput">—</div><div class="sub">tokens / second</div></div>
+  <div class="card kpi"><div class="label" data-tip="Time-to-first-token. How long a user waits before the first generated token appears.">TTFT <span class="tip">i</span></div><div class="value sm" id="ttftVal">—</div><div class="pprow" id="ttftPp"></div></div>
+  <div class="card kpi"><div class="label" data-tip="Share of prompt tokens in the selected window (15s/1m/5m/15m) served from cache (GPU + host + storage) instead of being recomputed. Computed from prefill_effective_tokens_total deltas over the window: rate(sum of *_hit) / rate(sum of all modes). Reset-aware: a server restart re-baselines the history. The cache_hit_rate gauge reads 0 whenever the server is idle — this is the number to trust.">Prefix Hit Rate <span class="tip">i</span></div><div class="value" id="hitKpi">—</div><div class="sub" id="hitKpiSub">over the active window</div></div>
+</div>
 <!-- 5. GPU KV Cache (the central question) -->
 <div class="section">GPU KV Cache <span class="muted" style="font-weight:500;text-transform:none;letter-spacing:0">— ACTIVE (in use) · EVICTABLE (cached) · FREE (empty)</span></div>
 <div class="card">
@@ -127,14 +135,6 @@ main{padding:15px 12px}.hero{margin-bottom:14px}.hero h2{font-size:21px}.hero p{
   <div class="card"><div class="label">KV pool breakdown <span class="muted" style="font-weight:500;text-transform:none;letter-spacing:0">• active vs evictable vs free</span></div><div class="chartbox"><canvas id="kvChart"></canvas></div></div>
 </div>
 
-<!-- 2. At-a-glance "Now" strip (promoted) -->
-<div class="grid four-kpi">
-  <div class="card kpi"><div class="label" data-tip="Requests currently being processed by the model. Together with the Queue number, tells you how loaded the scheduler is.">Running <span class="tip">i</span></div><div class="value accent" id="running">—</div><div class="sub">currently executing</div></div>
-  <div class="card kpi"><div class="label" data-tip="Requests waiting for the scheduler. Stays >0 while Running is at capacity = overloaded or stalled on cache pressure.">Queued <span class="tip">i</span></div><div class="value" id="queued">—</div><div class="sub">waiting for scheduler</div></div>
-  <div class="card kpi"><div class="label" data-tip="Output tokens per second the server is producing right now. 0 when idle.">Throughput <span class="tip">i</span></div><div class="value" id="throughput">—</div><div class="sub">tokens / second</div></div>
-  <div class="card kpi"><div class="label" data-tip="Time-to-first-token. How long a user waits before the first generated token appears.">TTFT <span class="tip">i</span></div><div class="value sm" id="ttftVal">—</div><div class="pprow" id="ttftPp"></div></div>
-  <div class="card kpi"><div class="label" data-tip="Share of prompt tokens in the selected window (15s/1m/5m/15m) served from cache (GPU + host + storage) instead of being recomputed. Computed from prefill_effective_tokens_total deltas over the window: rate(sum of *_hit) / rate(sum of all modes). Reset-aware: a server restart re-baselines the history. The cache_hit_rate gauge reads 0 whenever the server is idle — this is the number to trust.">Prefix Hit Rate <span class="tip">i</span></div><div class="value" id="hitKpi">—</div><div class="sub" id="hitKpiSub">over the active window</div></div>
-</div>
 <!-- 4. Cache Effectiveness (prefix cache — promoted) -->
 <div class="section">Cache Effectiveness</div>
 <div class="grid">
